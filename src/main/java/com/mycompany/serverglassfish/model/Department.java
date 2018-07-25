@@ -73,7 +73,7 @@ public class Department implements Serializable {
     private List<Purchase> purchaseListDepartment=new ArrayList<>();
     
     @OneToMany(mappedBy="departmentEquipment")
-    @SerializedName("mEquipmnetList")
+    @SerializedName("mEquipmentList")
     private List<EquipmentInventory> equipmentList=new ArrayList<>();
     
        
