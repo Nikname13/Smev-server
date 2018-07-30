@@ -41,7 +41,7 @@ public class GenericManyToManyServlet<T> extends GenericCRUDServlet<T> implement
         }else{
             respEncoding(resp).getWriter().write( getGsonFromList().toJson(dao.getAll()));
         }
-        
+        dao.closeSession();
     }
 
     @Override
