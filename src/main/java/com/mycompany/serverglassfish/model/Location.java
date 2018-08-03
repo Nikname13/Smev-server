@@ -41,7 +41,7 @@ public class Location implements Serializable{
     @JoinTable(name="department_location",
             joinColumns=@JoinColumn(name="location_id"),
             inverseJoinColumns=@JoinColumn(name="department_id"))
-    @SerializedName("mDepartmentModel")
+    @SerializedName("mDepartmentList")
     private List<Department> departmentsListLocation=new ArrayList<>();
 
     public int getId() {
