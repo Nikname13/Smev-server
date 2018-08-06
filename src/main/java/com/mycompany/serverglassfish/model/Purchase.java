@@ -45,7 +45,7 @@ public class Purchase implements Serializable {
     
     @ManyToOne
     @JoinColumn(name="department_id", nullable=false)
-    @SerializedName("mDepratment")
+    @SerializedName("mDepartment")
     private Department departmentPurchase;
     
 
