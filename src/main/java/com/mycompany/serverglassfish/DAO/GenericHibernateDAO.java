@@ -7,7 +7,9 @@ package com.mycompany.serverglassfish.DAO;
 
 import com.mycompany.serverglassfish.model.Department;
 import com.mycompany.serverglassfish.model.FileDump;
+import java.io.PrintWriter;
 import java.io.Serializable;
+import java.io.StringWriter;
 import java.util.List;
 import java.util.Set;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -21,8 +23,8 @@ import org.hibernate.Session;
  *
  * @author a.zolotarev
  */
-public class GenericHibernateDAO<T, ID extends Serializable> implements GenericDAO<T,ID> {
-    
+public class GenericHibernateDAO<T, ID extends Serializable> implements GenericDAO<T, ID> {
+
     private Class<T> persistentClass;
     private Session session;
 
@@ -36,27 +38,27 @@ public class GenericHibernateDAO<T, ID extends Serializable> implements GenericD
         }
         return session;
     }
-    
-    public void closeSession(){
+
+    public void closeSession() {
         getSession().close();
     }
-    
-    public Class<T> getPersistentClass(){
+
+    public Class<T> getPersistentClass() {
         return persistentClass;
     }
 
     @Override
-    public boolean create(T entity) {
-        try{
-         Session ses=getSession();
-         ses.beginTransaction();
-         ses.save(entity);
-         ses.getTransaction().commit();
-        }catch(Exception ex){
-            System.out.println("!!!Exception create "+ex);
-            return false;
+    public String create(T entity) {
+        try {
+            Session ses = getSession();
+            ses.beginTransaction();
+            ses.save(entity);
+            ses.getTransaction().commit();
+        } catch (Exception ex) {
+            System.out.println("!!!Exception create " + ex);
+            return ExceptionConverter.getSpecialty(ex);
         }
-        return true;
+        return "";
     }
 
     @Override
@@ -67,8 +69,8 @@ public class GenericHibernateDAO<T, ID extends Serializable> implements GenericD
     @Override
     public List<T> getAll() {
         CriteriaBuilder builder = getSession().getCriteriaBuilder();
-        CriteriaQuery<T> cr =  builder.createQuery(getPersistentClass());
-        Root<T> pRoot =  cr.from(getPersistentClass());
+        CriteriaQuery<T> cr = builder.createQuery(getPersistentClass());
+        Root<T> pRoot = cr.from(getPersistentClass());
         cr.select(pRoot);
         cr.orderBy(builder.asc(pRoot.get("id")));
         List<T> p = getSession().createQuery(cr).getResultList();
@@ -76,33 +78,33 @@ public class GenericHibernateDAO<T, ID extends Serializable> implements GenericD
     }
 
     @Override
-    public boolean update(T entity) {
-        try(Session ses=getSession()){
-         ses.beginTransaction();
-         ses.update(entity);
-         ses.getTransaction().commit();
-        }catch(Exception ex){
-           System.out.println("!!!Exception update "+ex);
-            return false;
+    public String update(T entity) {
+        try (Session ses = getSession()) {
+            ses.beginTransaction();
+            ses.update(entity);
+            ses.getTransaction().commit();
+        } catch (Exception ex) {
+            System.out.println("!!!Exception update " + ex);
+            return ExceptionConverter.getSpecialty(ex);
         }
-        return true;
+        return "";
     }
 
     @Override
-    public boolean delete(ID id) {
+    public String delete(ID id) {
         try (Session ses = getSession()) {
             ses.beginTransaction();
             getSession().delete(getSession().get(getPersistentClass(), id));
             System.out.println(id);
             ses.getTransaction().commit();
         } catch (Exception ex) {
-            return false;
+            return ExceptionConverter.getSpecialty(ex);
         }
-        return true;
+        return "";
     }
 
     @Override
-    public boolean delete(Set<Integer> entity) {
+    public String delete(Set<Integer> entity) {
         try (Session ses = getSession()) {
             ses.beginTransaction();
             for (Integer id : entity) {
@@ -111,23 +113,23 @@ public class GenericHibernateDAO<T, ID extends Serializable> implements GenericD
             }
             ses.getTransaction().commit();
         } catch (Exception ex) {
-            return false;
+            return ExceptionConverter.getSpecialty(ex);
         }
-        return true;
+        return "";
     }
-    
-       public List<T> getList(Integer id, SingularAttribute id_, String field) {
+
+    public List<T> getList(Integer id, SingularAttribute id_, String field) {
         System.out.println("get DownLoadList ");
         CriteriaBuilder builder = getSession().getCriteriaBuilder();
-        CriteriaQuery<T> cr =  builder.createQuery(getPersistentClass());
-        Root<T> pRoot =  cr.from(getPersistentClass());
+        CriteriaQuery<T> cr = builder.createQuery(getPersistentClass());
+        Root<T> pRoot = cr.from(getPersistentClass());
         cr.select(pRoot);
-        Join<T,Object> joi=pRoot.join(field);
+        Join<T, Object> joi = pRoot.join(field);
         cr.where(builder.equal(joi.get(id_), id));
         //cr.orderBy(builder.asc(pRoot.get("id")));
-        List<T> list=getSession().createQuery(cr).getResultList();
+        List<T> list = getSession().createQuery(cr).getResultList();
         System.out.println("Files list");
         return list;
     }
-    
+
 }

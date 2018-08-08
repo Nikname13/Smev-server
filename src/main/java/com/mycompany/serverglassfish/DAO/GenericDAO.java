@@ -14,11 +14,11 @@ import java.util.Set;
  */
 public interface GenericDAO<T,ID> {
     
-    boolean create(T entity);
+    String create(T entity);
     T get(ID id);
     List<T> getAll();
-    boolean update(T entity);
-    boolean delete(ID id);
-    boolean delete(Set<Integer> entity);
+    String update(T entity);
+    String delete(ID id);
+    String delete(Set<Integer> entity);
     
 }

@@ -74,18 +74,22 @@ public class GenericCRUDServlet<T> extends HttpServlet implements GenericServlet
         GenericHibernateDAO dao = new GenericHibernateDAO(getPersistentClass());
         final T p = getTypeFromJson(req);
         setField(p);
-        dao.create(p);
+        String error=dao.create(p);
         dao.closeSession();
-        System.out.print("out parameter= ");
+        if(error.isEmpty()){
         respEncoding(resp).getWriter().write(getJson(p));
+        }else{
+            respEncoding(resp).getWriter().write(error);
+        }
     }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         System.out.println("DELETE");
-        if (!new GenericHibernateDAO(getPersistentClass()).delete(Parser.getId(req))) {
-            respEncoding(resp).sendError(666, "Could not execute statement " + "Parameter");
+        String response=new GenericHibernateDAO(getPersistentClass()).delete(Parser.getId(req));
+        if (!response.isEmpty()) {
+            respEncoding(resp).getWriter().write(response);
         }
     }
     
