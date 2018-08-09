@@ -28,7 +28,7 @@ public class ExceptionConverter {
                 resp+=s+"\n";
             }
         }
-        return (resp.isEmpty()?getCaused(ex):resp);
+        return "Error"+(resp.isEmpty()?getCaused(ex):resp);
     }
 
     public static String getCaused(Exception ex) {

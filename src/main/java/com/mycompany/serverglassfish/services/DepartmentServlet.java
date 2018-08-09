@@ -13,6 +13,7 @@ import com.mycompany.serverglassfish.model.EquipmentInventory;
 import com.mycompany.serverglassfish.model.EquipmentState;
 import com.mycompany.serverglassfish.model.InventoryNumber;
 import com.mycompany.serverglassfish.model.Location;
+import com.mycompany.serverglassfish.model.Post;
 import com.mycompany.serverglassfish.model.Purchase;
 import com.mycompany.serverglassfish.model.State;
 import com.mycompany.serverglassfish.model.Worker;
@@ -46,9 +47,11 @@ public class DepartmentServlet extends GenericCRUDServlet<Department> {
                 .addExclusion(Area.class, "departmentsListArea")
                 .addExclusion(Purchase.class, "departmentPurchase")
                 .addExclusion(Worker.class, "departmentWorker")
+                .addExclusion(Post.class, "workerList")
                 .addExclusion(InventoryNumber.class, "supply")
                 .addExclusion(InventoryNumber.class, "eq_inventoryList")
-                .addExclusion(EquipmentState.class, "equipmentState")
+                .addExclusion(EquipmentInventory.class,"inventoryEditLogs")
+                .addExclusion(EquipmentInventory.class,"equipmentStates")
                 .addExclusion(State.class, "equipmentStateList")
                 .addExclusion(Equipment.class, "eq_parameters")
                 .addExclusion(Equipment.class, "eq_inventory")

@@ -35,8 +35,8 @@ public class State implements Serializable {
     @SerializedName("mName")
     private String name;
     
-    @OneToMany(mappedBy="state_eq")
-    private Set<EquipmentState> equipmentStateList=new HashSet<EquipmentState>();
+    @OneToMany(mappedBy="stateEquipment")
+    private Set<EquipmentInventory> equipmentInventoryList=new HashSet<EquipmentInventory>();
 
     public int getId() {
         return id;
@@ -54,13 +54,12 @@ public class State implements Serializable {
         this.name = name;
     }
 
-    public Set<EquipmentState> getEquipmentStateList() {
-        return equipmentStateList;
+    public Set<EquipmentInventory> getEquipmentInventoryList() {
+        return equipmentInventoryList;
     }
 
-    public void setEquipmentStateList(Set<EquipmentState> equipmentStateList) {
-        this.equipmentStateList = equipmentStateList;
+    public void setEquipmentInventoryList(Set<EquipmentInventory> equipmentInventoryList) {
+        this.equipmentInventoryList = equipmentInventoryList;
     }
-    
     
 }

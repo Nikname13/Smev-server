@@ -4,6 +4,7 @@ com\mycompany\serverglassfish\model\Area.class
 com\mycompany\serverglassfish\model\EquipmentParameter.class
 com\mycompany\serverglassfish\model\Department.class
 com\mycompany\serverglassfish\model\Location.class
+com\mycompany\serverglassfish\model\Post.class
 com\mycompany\serverglassfish\model\Purchase.class
 com\mycompany\serverglassfish\services\EquipmentServlet.class
 com\mycompany\serverglassfish\model\Parameter.class
@@ -33,6 +34,7 @@ com\mycompany\serverglassfish\DAO\ExceptionConverter.class
 com\mycompany\serverglassfish\model\Equipment.class
 com\mycompany\serverglassfish\model\Type.class
 com\mycompany\serverglassfish\DAO\GenericDAO.class
+com\mycompany\serverglassfish\model\InventoryEditLog.class
 com\mycompany\serverglassfish\services\DepartmentServlet.class
 com\mycompany\serverglassfish\model\InventoryNumber.class
 com\mycompany\serverglassfish\services\MovementServlet.class

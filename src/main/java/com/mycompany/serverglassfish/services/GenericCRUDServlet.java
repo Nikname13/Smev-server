@@ -101,7 +101,8 @@ public class GenericCRUDServlet<T> extends HttpServlet implements GenericServlet
         GenericHibernateDAO dao = new GenericHibernateDAO(getPersistentClass());
         final T p = getTypeFromJson(req);
         setField(p);
-        System.out.println("PUT result= "+dao.update(p));
+        String error=dao.update(p);
+        
         System.out.print("out parameter= ");
         //print(p);
         respEncoding(resp).getWriter().write(getJson(p));

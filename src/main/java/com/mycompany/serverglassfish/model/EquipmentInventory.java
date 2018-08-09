@@ -61,11 +61,6 @@ public class EquipmentInventory implements Serializable{
     @SerializedName("mEquipmentModel")
     private Equipment equipmentInv;
     
-    @ManyToOne
-    @JoinColumn(name="inventory_id", nullable=false)
-    @SerializedName("mInventoryNumber")
-    private InventoryNumber inv_number;
-    
     @OneToMany(mappedBy="equipmentState")
     @Cascade({CascadeType.ALL})
     @SerializedName("mEntityList")
@@ -75,6 +70,16 @@ public class EquipmentInventory implements Serializable{
     @JoinColumn(name="department_id",nullable=false)
     @SerializedName("mDepartmentModel")
     private Department departmentEquipment;
+    
+    @OneToMany(mappedBy="equipmentInventory")
+    @Cascade({CascadeType.ALL})
+    @SerializedName("mInventoryEditLog")
+    private List<InventoryEditLog> inventoryEditLogs=new ArrayList<>();
+    
+    @ManyToOne
+    @JoinColumn(name="state_id",nullable=false)
+    @SerializedName("mStateModel")
+    private State stateEquipment;
 
     public int getId() {
         return id;
@@ -123,16 +128,6 @@ public class EquipmentInventory implements Serializable{
     public void setEquipment(Equipment equipment) {
         this.equipmentInv = equipment;
     }
-
-    public InventoryNumber getInv_number() {
-        return inv_number;
-    }
-
-    public void setInv_number(InventoryNumber inv_number) {
-        this.inv_number = inv_number;
-    }
-    
-    
     public List<EquipmentState> getEquipmentStates() {
         return equipmentStates;
     }
@@ -153,4 +148,27 @@ public class EquipmentInventory implements Serializable{
     public void setDepartmentEquipment(Department departmentEquipment) {
         this.departmentEquipment = departmentEquipment;
     }
+
+    public List<InventoryEditLog> getInventoryEditLogs() {
+        return inventoryEditLogs;
+    }
+
+    public void setInventoryEditLogs(List<InventoryEditLog> inventoryEditLogs) {
+        this.inventoryEditLogs = inventoryEditLogs;
+    }
+    
+    public void addInvEditLog(InventoryEditLog editLog){
+        inventoryEditLogs.add(editLog);
+        editLog.setEquipmentInventory(this);
+    }
+
+    public State getStateEquipment() {
+        return stateEquipment;
+    }
+
+    public void setStateEquipment(State stateEquipment) {
+        this.stateEquipment = stateEquipment;
+    }
+    
+    
 }

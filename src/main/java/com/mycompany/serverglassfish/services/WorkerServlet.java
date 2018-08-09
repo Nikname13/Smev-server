@@ -7,6 +7,7 @@ package com.mycompany.serverglassfish.services;
 
 import com.google.gson.Gson;
 import com.mycompany.serverglassfish.model.Department;
+import com.mycompany.serverglassfish.model.Post;
 import com.mycompany.serverglassfish.model.Worker;
 import gson.GsonUtil;
 import javax.servlet.annotation.WebServlet;
@@ -30,6 +31,7 @@ public class WorkerServlet extends GenericCRUDServlet<Worker> {
                 .addExclusion(Department.class, "locationsListDepartment")
                 .addExclusion(Department.class, "workersListDepartmnet")
                 .addExclusion(Department.class, "equipmentList")
+                .addExclusion(Post.class, "workerList")
                 .getGson();
     }
 
@@ -41,6 +43,7 @@ public class WorkerServlet extends GenericCRUDServlet<Worker> {
                 .addExclusion(Department.class, "locationsListDepartment")
                 .addExclusion(Department.class, "workersListDepartmnet")
                 .addExclusion(Department.class, "equipmentList")
+                .addExclusion(Post.class, "workerList")
                 .getGson();
     }
   

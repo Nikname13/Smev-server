@@ -62,7 +62,7 @@ public class GenericHibernateDAO<T, ID extends Serializable> implements GenericD
     }
 
     @Override
-    public T get(ID id) {
+    public T get(ID id)  {
         return getSession().get(getPersistentClass(), id);
     }
 

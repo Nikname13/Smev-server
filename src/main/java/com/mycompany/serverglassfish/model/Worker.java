@@ -43,14 +43,15 @@ public class Worker implements Serializable{
     @SerializedName("mName")
     private String name;
     
-    @Column(name="post", nullable=false)
-    @SerializedName("mPost")
-    private String post;
-    
     @ManyToOne
     @JoinColumn(name="department_id", nullable=false)
     @SerializedName("mDepartmentModel")
     private Department departmentWorker;
+    
+        @ManyToOne
+    @JoinColumn(name="post_id", nullable=false)
+    @SerializedName("mPost")
+    private Post post;
 
     public int getId() {
         return id;
@@ -68,14 +69,14 @@ public class Worker implements Serializable{
         this.name = name;
     }
 
-    public String getPost() {
+    public Post getPost() {
         return post;
     }
 
-    public void setPost(String post) {
+    public void setPost(Post post) {
         this.post = post;
     }
-
+    
     public Department getDepartmentWorker() {
         return departmentWorker;
     }
@@ -83,6 +84,5 @@ public class Worker implements Serializable{
     public void setDepartmentWorker(Department departmentWorker) {
         this.departmentWorker = departmentWorker;
     }
-
        
 }

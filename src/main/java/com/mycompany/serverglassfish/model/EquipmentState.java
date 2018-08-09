@@ -31,11 +31,15 @@ public class EquipmentState implements Serializable {
     @SerializedName("mId")
     private int id;
     
+    @Column(name="name", nullable=false)
+    @SerializedName("mName")
+    private String name;
+    
     @Column(name="date", nullable=false)
     @SerializedName("mDate")
     private LocalDate dateState;
     
-    @Column(name="description")
+    @Column(name="description", nullable=false)
     @SerializedName("mDescription")
     private String descriptionState;
     
@@ -56,6 +60,14 @@ public class EquipmentState implements Serializable {
         this.id = id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
     public LocalDate getDateState() {
         return dateState;
     }

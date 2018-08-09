@@ -11,7 +11,9 @@ import com.mycompany.serverglassfish.model.Department;
 import com.mycompany.serverglassfish.model.Equipment;
 import com.mycompany.serverglassfish.model.EquipmentInventory;
 import com.mycompany.serverglassfish.model.EquipmentState;
+import com.mycompany.serverglassfish.model.InventoryEditLog;
 import com.mycompany.serverglassfish.model.InventoryNumber;
+import com.mycompany.serverglassfish.model.Post;
 import com.mycompany.serverglassfish.model.State;
 import com.mycompany.serverglassfish.model.Worker;
 
@@ -46,10 +48,12 @@ public class EquipmentInventoryServlet extends GenericCRUDServlet<EquipmentInven
                 .addExclusion(Equipment.class,"eq_parameters")
                 .addExclusion(Equipment.class,"eq_inventory")
                 .addExclusion(Equipment.class, "type")
+                .addExclusion(EquipmentInventory.class,"inventoryEditLogs")
+                .addExclusion(EquipmentInventory.class,"equipmentStates")
                 .addExclusion(InventoryNumber.class, "supply")
                 .addExclusion(InventoryNumber.class, "eq_inventoryList")
                 .addExclusion(EquipmentState.class, "equipmentState")
-                .addExclusion(State.class, "equipmentStateList")
+                .addExclusion(State.class, "equipmentInventoryList")
                 .addExclusion(Department.class, "area")
                 .addExclusion(Department.class,"purchaseListDepartment")
                 .addExclusion(Department.class, "locationsListDepartment")
@@ -66,12 +70,14 @@ public class EquipmentInventoryServlet extends GenericCRUDServlet<EquipmentInven
                 .addExclusion(Equipment.class, "type")
                 .addExclusion(InventoryNumber.class, "supply")
                 .addExclusion(InventoryNumber.class, "eq_inventoryList")
+                .addExclusion(InventoryEditLog.class, "equipmentInventory")
                 .addExclusion(EquipmentState.class, "equipmentState")
-                .addExclusion(State.class, "equipmentStateList")
+                .addExclusion(State.class, "equipmentInventoryList")
                 .addExclusion(Department.class, "area")
                 .addExclusion(Department.class,"purchaseListDepartment")
                 .addExclusion(Department.class, "locationsListDepartment")
                 .addExclusion(Worker.class, "departmentWorker")
+                .addExclusion(Post.class, "workerList")
                 .addExclusion(Department.class, "equipmentList")
                 .getGson();
     }
