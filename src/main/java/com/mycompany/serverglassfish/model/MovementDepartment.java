@@ -6,32 +6,22 @@
 package com.mycompany.serverglassfish.model;
 
 import com.google.gson.annotations.SerializedName;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-import org.hibernate.annotations.Immutable;
 
 /**
  *
  * @author a.zolotarev
  */
 @Entity
-@Table(name="worker")
-public class Worker implements Serializable{
+@Table(name="movement_dapartment")
+public class MovementDepartment {
     
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -43,15 +33,18 @@ public class Worker implements Serializable{
     @SerializedName("mName")
     private String name;
     
-    @ManyToOne
-    @JoinColumn(name="department_id", nullable=false)
-    @SerializedName("mDepartmentModel")
-    private Department departmentWorker;
+    @Column(name="department_number", nullable=false)
+    @SerializedName("mDepartmentNumber")
+    private String departmentNumber;
+    
+    @Column(name="department_id", nullable=false)
+    @SerializedName("mDepartmentId")
+    private int departmentId;
     
     @ManyToOne
-    @JoinColumn(name="post_id", nullable=false)
-    @SerializedName("mPost")
-    private Post post;
+    @JoinColumn(name="movement_id")
+    @SerializedName("mDepartmentMovement")
+    private MovementLog departmentMovement;
 
     public int getId() {
         return id;
@@ -69,20 +62,29 @@ public class Worker implements Serializable{
         this.name = name;
     }
 
-    public Post getPost() {
-        return post;
+    public String getDepartmentNumber() {
+        return departmentNumber;
     }
 
-    public void setPost(Post post) {
-        this.post = post;
+    public void setDepartmentNumber(String departmentNumber) {
+        this.departmentNumber = departmentNumber;
+    }
+
+    public int getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(int departmentId) {
+        this.departmentId = departmentId;
+    }
+
+    public MovementLog getDepartmentMovement() {
+        return departmentMovement;
+    }
+
+    public void setDepartmentMovement(MovementLog departmentMovement) {
+        this.departmentMovement = departmentMovement;
     }
     
-    public Department getDepartmentWorker() {
-        return departmentWorker;
-    }
-
-    public void setDepartmentWorker(Department departmentWorker) {
-        this.departmentWorker = departmentWorker;
-    }
-       
+    
 }

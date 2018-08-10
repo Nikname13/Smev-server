@@ -76,6 +76,9 @@ public class Department implements Serializable {
     @SerializedName("mEquipmentList")
     private List<EquipmentInventory> equipmentList=new ArrayList<>();
     
+    @ManyToOne
+    @JoinColumn(name="file_dump_id")
+    private FileDump avatar;
        
     public Area getArea() {
         return area;
@@ -162,4 +165,12 @@ public class Department implements Serializable {
         this.equipmentList = equipmentList;
     }
 
+    public FileDump getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(FileDump avatar) {
+        this.avatar = avatar;
+    }
+    
 }

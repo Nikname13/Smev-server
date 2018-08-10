@@ -6,14 +6,13 @@
 package com.mycompany.serverglassfish.model;
 
 import com.google.gson.annotations.SerializedName;
-import java.util.HashSet;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -21,9 +20,10 @@ import javax.persistence.Table;
  * @author a.zolotarev
  */
 @Entity
-@Table(name="post")
-public class Post {
-     @Id
+@Table(name="movement_worker")
+public class MovementWorker {
+    
+    @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id")
     @SerializedName("mId")
@@ -33,8 +33,18 @@ public class Post {
     @SerializedName("mName")
     private String name;
     
-    @OneToMany(mappedBy="post")
-    private Set<Worker> workerList=new HashSet<Worker>();
+    @Column(name="post", nullable=false)
+    @SerializedName("mPost")
+    private String post;
+    
+    @Column(name="worker_id", nullable=false)
+    @SerializedName("mWorkerId")
+    private int workerId;
+    
+    @ManyToOne
+    @JoinColumn(name="movement_id")
+    @SerializedName("mWorkerMovement")
+    private MovementLog workerMovement;
 
     public int getId() {
         return id;
@@ -52,13 +62,27 @@ public class Post {
         this.name = name;
     }
 
-    public Set<Worker> getWorkerList() {
-        return workerList;
+    public String getPost() {
+        return post;
     }
 
-    public void setWorkerList(Set<Worker> workerList) {
-        this.workerList = workerList;
+    public void setPost(String post) {
+        this.post = post;
     }
-    
-    
+
+    public int getWorkerId() {
+        return workerId;
+    }
+
+    public void setWorkerId(int workerId) {
+        this.workerId = workerId;
+    }
+
+    public MovementLog getWorkerMovement() {
+        return workerMovement;
+    }
+
+    public void setWorkerMovement(MovementLog workerMovement) {
+        this.workerMovement = workerMovement;
+    }
 }

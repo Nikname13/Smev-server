@@ -6,33 +6,22 @@
 package com.mycompany.serverglassfish.model;
 
 import com.google.gson.annotations.SerializedName;
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
-import org.hibernate.annotations.Immutable;
 
 /**
  *
  * @author a.zolotarev
  */
 @Entity
-@Table(name="worker")
-public class Worker implements Serializable{
-    
+@Table(name="movement_equipment")
+public class MovementEquipment {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id")
@@ -43,15 +32,18 @@ public class Worker implements Serializable{
     @SerializedName("mName")
     private String name;
     
-    @ManyToOne
-    @JoinColumn(name="department_id", nullable=false)
-    @SerializedName("mDepartmentModel")
-    private Department departmentWorker;
+    @Column(name="inventory_number", nullable=false)
+    @SerializedName("mInventoryNumber")
+    private String inventoryNumber;
+    
+    @Column(name="equipment_id", nullable=false)
+    @SerializedName("mEquipmentId")
+    private int equipmentId;
     
     @ManyToOne
-    @JoinColumn(name="post_id", nullable=false)
-    @SerializedName("mPost")
-    private Post post;
+    @JoinColumn(name="movement_id")
+    @SerializedName("mEquipmentMovement")
+    private MovementLog equipmentMovement;
 
     public int getId() {
         return id;
@@ -69,20 +61,28 @@ public class Worker implements Serializable{
         this.name = name;
     }
 
-    public Post getPost() {
-        return post;
+    public String getInventoryNumber() {
+        return inventoryNumber;
     }
 
-    public void setPost(Post post) {
-        this.post = post;
+    public void setInventoryNumber(String inventoryNumber) {
+        this.inventoryNumber = inventoryNumber;
+    }
+
+    public int getEquipmentId() {
+        return equipmentId;
+    }
+
+    public void setEquipmentId(int equipmentId) {
+        this.equipmentId = equipmentId;
+    }
+
+    public MovementLog getEquipmentMovement() {
+        return equipmentMovement;
+    }
+
+    public void setEquipmentMovement(MovementLog equipmentMovement) {
+        this.equipmentMovement = equipmentMovement;
     }
     
-    public Department getDepartmentWorker() {
-        return departmentWorker;
-    }
-
-    public void setDepartmentWorker(Department departmentWorker) {
-        this.departmentWorker = departmentWorker;
-    }
-       
 }

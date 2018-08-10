@@ -10,7 +10,8 @@ import com.mycompany.serverglassfish.model.Area;
 import com.mycompany.serverglassfish.model.Department;
 import com.mycompany.serverglassfish.model.Equipment;
 import com.mycompany.serverglassfish.model.EquipmentInventory;
-import com.mycompany.serverglassfish.model.EquipmentState;
+import com.mycompany.serverglassfish.model.EquipmentStateLog;
+import com.mycompany.serverglassfish.model.FileDump;
 import com.mycompany.serverglassfish.model.InventoryNumber;
 import com.mycompany.serverglassfish.model.Location;
 import com.mycompany.serverglassfish.model.Post;
@@ -52,11 +53,13 @@ public class DepartmentServlet extends GenericCRUDServlet<Department> {
                 .addExclusion(InventoryNumber.class, "eq_inventoryList")
                 .addExclusion(EquipmentInventory.class,"inventoryEditLogs")
                 .addExclusion(EquipmentInventory.class,"equipmentStates")
-                .addExclusion(State.class, "equipmentStateList")
+                .addExclusion(State.class, "equipmentInventoryList")
                 .addExclusion(Equipment.class, "eq_parameters")
                 .addExclusion(Equipment.class, "eq_inventory")
                 .addExclusion(Equipment.class, "type")
                 .addExclusion(EquipmentInventory.class, "departmentEquipment")
+                .addExclusion(EquipmentInventory.class, "avatar")
+                .addExclusion(FileDump.class,"departmentAvatar")
                 .getGson();
     }
     

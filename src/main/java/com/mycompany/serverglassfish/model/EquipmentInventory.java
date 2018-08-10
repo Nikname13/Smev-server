@@ -44,10 +44,6 @@ public class EquipmentInventory implements Serializable{
     @SerializedName("mGuaranty")
     private int guaranty;
     
-    @Column(name="photos")
-    @SerializedName("mPhotos")
-    private String photos;
-    
     @Column(name="description")
     @SerializedName("mDescription")
     private String description;
@@ -61,10 +57,10 @@ public class EquipmentInventory implements Serializable{
     @SerializedName("mEquipmentModel")
     private Equipment equipmentInv;
     
-    @OneToMany(mappedBy="equipmentState")
+    @OneToMany(mappedBy="equipmentInventoryLog")
     @Cascade({CascadeType.ALL})
     @SerializedName("mEntityList")
-    private List<EquipmentState> equipmentStates=new ArrayList<>();
+    private List<EquipmentStateLog> equipmentStates=new ArrayList<>();
     
     @ManyToOne
     @JoinColumn(name="department_id",nullable=false)
@@ -80,6 +76,15 @@ public class EquipmentInventory implements Serializable{
     @JoinColumn(name="state_id",nullable=false)
     @SerializedName("mStateModel")
     private State stateEquipment;
+    
+    @ManyToOne
+    @JoinColumn(name="inventory_number_id",nullable=false)
+    @SerializedName("mInventoryNumber")
+    private InventoryNumber inv_number;
+    
+    @ManyToOne
+    @JoinColumn(name="file_dump_id")
+    private FileDump avatar;
 
     public int getId() {
         return id;
@@ -95,14 +100,6 @@ public class EquipmentInventory implements Serializable{
 
     public void setGuaranty(int guaranty) {
         this.guaranty = guaranty;
-    }
-
-    public String getPhotos() {
-        return photos;
-    }
-
-    public void setPhotos(String photos) {
-        this.photos = photos;
     }
 
     public String getDescription() {
@@ -128,17 +125,17 @@ public class EquipmentInventory implements Serializable{
     public void setEquipment(Equipment equipment) {
         this.equipmentInv = equipment;
     }
-    public List<EquipmentState> getEquipmentStates() {
+    public List<EquipmentStateLog> getEquipmentStates() {
         return equipmentStates;
     }
 
-    public void setEquipmentStates(List<EquipmentState> equipmentStates) {
+    public void setEquipmentStates(List<EquipmentStateLog> equipmentStates) {
         this.equipmentStates = equipmentStates;
     }
     
-    public void addState(EquipmentState state){
+    public void addState(EquipmentStateLog state){
         equipmentStates.add(state);
-        state.setEquipmentSate(this);
+        state.setEquipmentInventoryLog(this);
     }
 
     public Department getDepartmentEquipment() {
@@ -169,6 +166,16 @@ public class EquipmentInventory implements Serializable{
     public void setStateEquipment(State stateEquipment) {
         this.stateEquipment = stateEquipment;
     }
-    
-    
+
+    public InventoryNumber getInv_number() {
+        return inv_number;
+    }
+
+    public void setInv_number(InventoryNumber inv_number) {
+        this.inv_number = inv_number;
+    }
+
+    public FileDump getAvatar() {
+        return avatar;
+    }
 }

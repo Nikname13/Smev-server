@@ -22,8 +22,8 @@ import javax.persistence.Table;
  * @author a.zolotarev
  */
 @Entity
-@Table(name="equipment_state")
-public class EquipmentState implements Serializable {
+@Table(name="equipment_state_log")
+public class EquipmentStateLog implements Serializable {
    
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -45,12 +45,7 @@ public class EquipmentState implements Serializable {
     
     @ManyToOne
     @JoinColumn(name="equipment_id")
-    private EquipmentInventory equipmentState;
-    
-    @ManyToOne
-    @JoinColumn(name="state_id")
-    @SerializedName("mStateModel")
-    private State state_eq;
+    private EquipmentInventory equipmentInventoryLog;
 
     public int getId() {
         return id;
@@ -84,19 +79,13 @@ public class EquipmentState implements Serializable {
         this.descriptionState = descriptionState;
     }
 
-    public EquipmentInventory getEquipmentSate() {
-        return equipmentState;
+    public EquipmentInventory getEquipmentInventoryLog() {
+        return equipmentInventoryLog;
     }
 
-    public void setEquipmentSate(EquipmentInventory equipmentSate) {
-        this.equipmentState = equipmentSate;
+    public void setEquipmentInventoryLog(EquipmentInventory equipmentInventoryLog) {
+        this.equipmentInventoryLog = equipmentInventoryLog;
     }
 
-    public State getState_eq() {
-        return state_eq;
-    }
-
-    public void setState_eq(State state_eq) {
-        this.state_eq = state_eq;
-    }
+    
 }

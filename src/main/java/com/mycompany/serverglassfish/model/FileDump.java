@@ -9,8 +9,11 @@ import com.google.gson.annotations.SerializedName;
 import com.mycompany.serverglassfish.model.Department;
 import com.mycompany.serverglassfish.model.Equipment;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,6 +22,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -60,6 +64,12 @@ public class FileDump {
             joinColumns=@JoinColumn(name="file_dump_id"),
             inverseJoinColumns=@JoinColumn(name="department_id"))
     private  List<Department> department_photo_files=new ArrayList<>();
+    
+    @OneToMany(mappedBy="avatar")
+    private Set<Department> departmentAvatar=new HashSet();
+    
+    @OneToMany(mappedBy="avatar")
+    private Set<EquipmentInventory> equipmentAvatar=new HashSet();
 
     public int getId() {
         return id;
@@ -121,6 +131,24 @@ public class FileDump {
     public String getNameDepartmentPhotoList(){
         return "department_photo_files";
     }
+
+    public Set<Department> getDepartmentAvatar() {
+        return departmentAvatar;
+    }
+
+    public void setDepartmentAvatar(Set<Department> departmentAvatar) {
+        this.departmentAvatar = departmentAvatar;
+    }
+
+    public Set<EquipmentInventory> getEquipmentAvatar() {
+        return equipmentAvatar;
+    }
+
+    public void setEquipmentAvatar(Set<EquipmentInventory> equipmentAvatar) {
+        this.equipmentAvatar = equipmentAvatar;
+    }
+    
+    
     
     public void addDoc(Department department){
         department_doc_files.add(department);

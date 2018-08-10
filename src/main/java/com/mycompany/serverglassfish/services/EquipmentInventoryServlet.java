@@ -10,7 +10,8 @@ import com.mycompany.serverglassfish.model.Area;
 import com.mycompany.serverglassfish.model.Department;
 import com.mycompany.serverglassfish.model.Equipment;
 import com.mycompany.serverglassfish.model.EquipmentInventory;
-import com.mycompany.serverglassfish.model.EquipmentState;
+import com.mycompany.serverglassfish.model.EquipmentStateLog;
+import com.mycompany.serverglassfish.model.FileDump;
 import com.mycompany.serverglassfish.model.InventoryEditLog;
 import com.mycompany.serverglassfish.model.InventoryNumber;
 import com.mycompany.serverglassfish.model.Post;
@@ -34,8 +35,8 @@ public class EquipmentInventoryServlet extends GenericCRUDServlet<EquipmentInven
     @Override
     public void setField(EquipmentInventory entity) {
         if(entity.getEquipmentStates()!=null){
-            for(EquipmentState state : entity.getEquipmentStates()){
-                state.setEquipmentSate(entity);
+            for(EquipmentStateLog state : entity.getEquipmentStates()){
+                state.setEquipmentInventoryLog(entity);
             }
         }
     }
@@ -52,7 +53,7 @@ public class EquipmentInventoryServlet extends GenericCRUDServlet<EquipmentInven
                 .addExclusion(EquipmentInventory.class,"equipmentStates")
                 .addExclusion(InventoryNumber.class, "supply")
                 .addExclusion(InventoryNumber.class, "eq_inventoryList")
-                .addExclusion(EquipmentState.class, "equipmentState")
+                .addExclusion(EquipmentStateLog.class, "equipmentState")
                 .addExclusion(State.class, "equipmentInventoryList")
                 .addExclusion(Department.class, "area")
                 .addExclusion(Department.class,"purchaseListDepartment")
@@ -71,7 +72,7 @@ public class EquipmentInventoryServlet extends GenericCRUDServlet<EquipmentInven
                 .addExclusion(InventoryNumber.class, "supply")
                 .addExclusion(InventoryNumber.class, "eq_inventoryList")
                 .addExclusion(InventoryEditLog.class, "equipmentInventory")
-                .addExclusion(EquipmentState.class, "equipmentState")
+                .addExclusion(EquipmentStateLog.class,"equipmentInventoryLog")
                 .addExclusion(State.class, "equipmentInventoryList")
                 .addExclusion(Department.class, "area")
                 .addExclusion(Department.class,"purchaseListDepartment")
@@ -79,6 +80,8 @@ public class EquipmentInventoryServlet extends GenericCRUDServlet<EquipmentInven
                 .addExclusion(Worker.class, "departmentWorker")
                 .addExclusion(Post.class, "workerList")
                 .addExclusion(Department.class, "equipmentList")
+                .addExclusion(Department.class, "avatar")
+                .addExclusion(FileDump.class,"equipmentAvatar")
                 .getGson();
     }
 

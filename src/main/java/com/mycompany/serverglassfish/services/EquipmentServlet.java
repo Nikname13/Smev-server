@@ -10,7 +10,8 @@ import com.mycompany.serverglassfish.model.Department;
 import com.mycompany.serverglassfish.model.Equipment;
 import com.mycompany.serverglassfish.model.EquipmentInventory;
 import com.mycompany.serverglassfish.model.EquipmentParameter;
-import com.mycompany.serverglassfish.model.EquipmentState;
+import com.mycompany.serverglassfish.model.EquipmentStateLog;
+import com.mycompany.serverglassfish.model.FileDump;
 import com.mycompany.serverglassfish.model.InventoryNumber;
 import com.mycompany.serverglassfish.model.Parameter;
 import com.mycompany.serverglassfish.model.Post;
@@ -68,7 +69,7 @@ public class EquipmentServlet extends GenericCRUDServlet<Equipment> {
                 .addExclusion(Parameter.class, "eq_parameter")
                 .addExclusion(EquipmentInventory.class,"equipmentInv")
                 .addExclusion(EquipmentInventory.class,"inventoryEditLogs")
-                
+                .addExclusion(EquipmentInventory.class, "equipmentStates")
                 .addExclusion(State.class, "equipmentInventoryList")
                 .addExclusion(InventoryNumber.class, "supply")
                 .addExclusion(InventoryNumber.class, "eq_inventoryList")
@@ -78,6 +79,8 @@ public class EquipmentServlet extends GenericCRUDServlet<Equipment> {
                 .addExclusion(Worker.class, "departmentWorker")
                 .addExclusion(Post.class, "workerList")
                 .addExclusion(Department.class, "equipmentList")
+                .addExclusion(Department.class, "avatar")
+                .addExclusion(FileDump.class,"equipmentAvatar")
                 .getGson();
     }    
 }

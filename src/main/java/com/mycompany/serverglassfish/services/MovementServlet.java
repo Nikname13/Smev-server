@@ -11,7 +11,10 @@ import com.mycompany.serverglassfish.model.Department;
 import com.mycompany.serverglassfish.model.Equipment;
 import com.mycompany.serverglassfish.model.EquipmentInventory;
 import com.mycompany.serverglassfish.model.InventoryNumber;
-import com.mycompany.serverglassfish.model.Movement;
+import com.mycompany.serverglassfish.model.MovementLog;
+import com.mycompany.serverglassfish.model.MovementDepartment;
+import com.mycompany.serverglassfish.model.MovementEquipment;
+import com.mycompany.serverglassfish.model.MovementWorker;
 import com.mycompany.serverglassfish.model.Worker;
 import gson.GsonUtil;
 import javax.servlet.annotation.WebServlet;
@@ -21,39 +24,27 @@ import javax.servlet.annotation.WebServlet;
  * @author a.zolotarev
  */
 @WebServlet(name = "MovementServlet", urlPatterns = {"/movement_servlet"})
-public class MovementServlet extends GenericCRUDServlet<Movement>{
+public class MovementServlet extends GenericCRUDServlet<MovementLog>{
     
     public MovementServlet() {
-        super(Movement.class);
+        super(MovementLog.class);
     }
 
     @Override
     public Gson getGsonFromList() {
         return new GsonUtil()
-                .addExclusion(Area.class, "departmentsListArea")
-                .addExclusion(Department.class,"purchaseListDepartment")
-                .addExclusion(Department.class, "locationsListDepartment")
-                .addExclusion(Department.class, "workersListDepartmnet")
-                .addExclusion(Department.class, "equipmentList")
-                .addExclusion(Movement.class, "equipmentsListMovement")
-                .addExclusion(Movement.class, "workersListMovement")
+                .addExclusion(MovementLog.class, "departmentsList")
+                .addExclusion(MovementLog.class, "equipmentsList")
+                .addExclusion(MovementLog.class, "workersList")
                 .getGson();
     }
 
     @Override
     public Gson getGsonFromEntity() {
         return new GsonUtil()
-                .addExclusion(Area.class, "departmentsListArea")
-                .addExclusion(Department.class,"purchaseListDepartment")
-                .addExclusion(Department.class, "locationsListDepartment")
-                .addExclusion(Department.class, "equipmentList")
-                .addExclusion(Equipment.class,"eq_parameters")
-                .addExclusion(Equipment.class,"eq_inventory")
-                .addExclusion(Equipment.class, "type")
-                .addExclusion(InventoryNumber.class, "supply")
-                .addExclusion(InventoryNumber.class, "eq_inventoryList")
-                .addExclusion(EquipmentInventory.class, "departmentEquipment")
-                .addExclusion(Worker.class, "departmentWorker")
+                .addExclusion(MovementDepartment.class,"departmentMovement")
+                .addExclusion(MovementEquipment.class,"equipmentMovement")
+                .addExclusion(MovementWorker.class,"workerMovement")
                 .getGson();
     }
     

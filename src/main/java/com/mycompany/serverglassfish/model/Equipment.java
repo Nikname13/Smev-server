@@ -48,10 +48,6 @@ public class Equipment implements Serializable {
     @SerializedName("mDescription")
     private String description;
     
-    @Column(name="config")
-    @SerializedName("mConfig")
-    private String config;
-    
     @ManyToOne
     @JoinColumn(name="type_id", nullable=false)
     @SerializedName("mTypeModel")
@@ -95,14 +91,6 @@ public class Equipment implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getConfig() {
-        return config;
-    }
-
-    public void setConfig(String config) {
-        this.config = config;
     }
 
     public Type getType() {

@@ -20,6 +20,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
@@ -29,8 +30,8 @@ import org.hibernate.annotations.CascadeType;
  * @author a.zolotarev
  */
 @Entity
-@Table(name="movement")
-public class Movement implements Serializable {
+@Table(name="movement_log")
+public class MovementLog implements Serializable {
     
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -46,26 +47,17 @@ public class Movement implements Serializable {
     @SerializedName("mDate")
     private LocalDate date;
     
-    @ManyToMany
-    @JoinTable(name="movement_department",
-            joinColumns=@JoinColumn(name="movement_id"),
-            inverseJoinColumns=@JoinColumn(name="department_id"))
+    @OneToMany(mappedBy="departmentMovement", cascade=javax.persistence.CascadeType.ALL)
     @SerializedName("mDepartmentList")
-    private List<Department> movementsListMovement=new ArrayList<>();
+    private List<MovementDepartment> departmentsList=new ArrayList<>();
     
-    @ManyToMany
-    @JoinTable(name="movement_equipment",
-            joinColumns=@JoinColumn(name="movement_id"),
-            inverseJoinColumns=@JoinColumn(name="equipment_id"))
+    @OneToMany(mappedBy="equipmentMovement", cascade=javax.persistence.CascadeType.ALL)
     @SerializedName("mEntityList")
-    private List<EquipmentInventory> equipmentsListMovement=new ArrayList<>();
+    private List<MovementEquipment> equipmentsList=new ArrayList<>();
     
-    @ManyToMany
-    @JoinTable(name="movement_worker",
-            joinColumns=@JoinColumn(name="movement_id"),
-            inverseJoinColumns=@JoinColumn(name="worker_id"))
+    @OneToMany(mappedBy="workerMovement",cascade=javax.persistence.CascadeType.ALL)
     @SerializedName("mWorkerList")
-    private Set<Worker> workersListMovement=new HashSet<>();
+    private List<MovementWorker> workersList=new ArrayList();
 
     public int getId() {
         return id;
@@ -89,31 +81,31 @@ public class Movement implements Serializable {
 
     public void setDate(LocalDate date) {
         this.date = date;
+    } 
+
+    public List<MovementDepartment> getDepartmentsList() {
+        return departmentsList;
     }
 
-    public List<Department> getMovementsListMovement() {
-        return movementsListMovement;
+    public void setDepartmentsList(List<MovementDepartment> departmentsList) {
+        this.departmentsList = departmentsList;
     }
 
-    public void setMovementsListMovement(List<Department> movementsListMovement) {
-        this.movementsListMovement = movementsListMovement;
+    public List<MovementEquipment> getEquipmentsList() {
+        return equipmentsList;
     }
 
-    public List<EquipmentInventory> getEquipmentsListMovement() {
-        return equipmentsListMovement;
+    public void setEquipmentsList(List<MovementEquipment> equipmentsList) {
+        this.equipmentsList = equipmentsList;
     }
 
-    public void setEquipmentsListMovement(List<EquipmentInventory> equipmentsListMovement) {
-        this.equipmentsListMovement = equipmentsListMovement;
+    public List<MovementWorker> getWorkersList() {
+        return workersList;
     }
 
-    public Set<Worker> getWorkersListMovement() {
-        return workersListMovement;
-    }
-
-    public void setWorkersListMovement(Set<Worker> workersListMovement) {
-        this.workersListMovement = workersListMovement;
+    public void setWorkersList(List<MovementWorker> workersList) {
+        this.workersList = workersList;
     }
     
-    
+   
 }
