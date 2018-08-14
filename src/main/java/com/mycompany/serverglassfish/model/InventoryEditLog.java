@@ -36,15 +36,15 @@ public class InventoryEditLog {
     
     @Column(name="inventory_number_id", nullable=false)
     @SerializedName("mInventoryId")
-    private String inventoryId;
+    private int inventoryId;
     
     @Column(name="date", nullable=false)
     @SerializedName("mDate")
-    private LocalDate dateState;
+    private LocalDate dateInventoryLog;
     
     @Column(name="description", nullable=false)
     @SerializedName("mDescription")
-    private String descriptionState;
+    private String descriptionInventoryLog;
       
     @ManyToOne
     @JoinColumn(name="equipment_inventory_id")
@@ -59,20 +59,12 @@ public class InventoryEditLog {
         this.id = id;
     }
 
-    public LocalDate getDateState() {
-        return dateState;
-    }
-
-    public void setDateState(LocalDate dateState) {
-        this.dateState = dateState;
-    }
-
     public String getDescriptionState() {
-        return descriptionState;
+        return descriptionInventoryLog;
     }
 
     public void setDescriptionState(String descriptionState) {
-        this.descriptionState = descriptionState;
+        this.descriptionInventoryLog = descriptionState;
     }
 
     public EquipmentInventory getEquipmentInventory() {
@@ -81,6 +73,30 @@ public class InventoryEditLog {
 
     public void setEquipmentInventory(EquipmentInventory equipmentInventory) {
         this.equipmentInventory = equipmentInventory;
+    }
+
+    public String getInventoryNumber() {
+        return inventoryNumber;
+    }
+
+    public void setInventoryNumber(String inventoryNumber) {
+        this.inventoryNumber = inventoryNumber;
+    }
+
+    public int getInventoryId() {
+        return inventoryId;
+    }
+
+    public void setInventoryId(int inventoryId) {
+        this.inventoryId = inventoryId;
+    }
+
+    public LocalDate getDateInventoryLog() {
+        return dateInventoryLog;
+    }
+
+    public void setDateInventoryLog(LocalDate dateInventoryLog) {
+        this.dateInventoryLog = dateInventoryLog;
     }
     
     

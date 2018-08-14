@@ -24,6 +24,15 @@ public class WorkerServlet extends GenericCRUDServlet<Worker> {
     }
 
     @Override
+    public void setField(Worker entity) {
+        if(entity.getPost()!=null){
+           entity.getPost().addWorker(entity);
+        }
+    }
+    
+    
+
+    @Override
     public Gson getGsonFromList() {
         return new GsonUtil()
                 .addExclusion(Department.class, "area")

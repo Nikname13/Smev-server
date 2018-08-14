@@ -39,6 +39,11 @@ public class EquipmentInventoryServlet extends GenericCRUDServlet<EquipmentInven
                 state.setEquipmentInventoryLog(entity);
             }
         }
+        if(entity.getInventoryEditLogs()!=null){
+            for(InventoryEditLog invLog:entity.getInventoryEditLogs()){
+               invLog.setEquipmentInventory(entity);
+            }
+        }
     }
     
     

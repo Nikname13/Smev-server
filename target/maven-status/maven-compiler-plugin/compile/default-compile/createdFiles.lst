@@ -22,6 +22,7 @@ com\mycompany\serverglassfish\model\Worker.class
 com\mycompany\serverglassfish\services\GenericManyToMany.class
 com\mycompany\serverglassfish\services\GenericCRUDServlet.class
 com\mycompany\serverglassfish\services\GenericFileServlet.class
+com\mycompany\serverglassfish\services\PostServlet.class
 gson\GsonExclusionStrategy.class
 com\mycompany\serverglassfish\services\GenericFile.class
 com\mycompany\serverglassfish\services\PurchaseServlet.class

@@ -60,5 +60,9 @@ public class Post {
         this.workerList = workerList;
     }
     
+    public void addWorker(Worker worker){
+        workerList.add(worker);
+    }
+    
     
 }
