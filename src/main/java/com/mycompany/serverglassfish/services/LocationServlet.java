@@ -52,7 +52,7 @@ public class LocationServlet extends GenericManyToManyServlet<Location> {
 
     @Override
     public String getNameField(String type) {
-        return new Location().getNameDepartment();
+        return new Location().getDepartmentFieldName();
     }
     
     

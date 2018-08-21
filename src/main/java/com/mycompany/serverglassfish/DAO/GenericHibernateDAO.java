@@ -126,7 +126,7 @@ public class GenericHibernateDAO<T, ID extends Serializable> implements GenericD
         cr.select(pRoot);
         Join<T, Object> joi = pRoot.join(field);
         cr.where(builder.equal(joi.get(id_), id));
-        //cr.orderBy(builder.asc(pRoot.get("id")));
+        cr.orderBy(builder.asc(pRoot.get("id")));
         List<T> list = getSession().createQuery(cr).getResultList();
         System.out.println("Files list");
         return list;

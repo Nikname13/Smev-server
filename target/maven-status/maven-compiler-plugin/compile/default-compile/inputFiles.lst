@@ -31,6 +31,7 @@ C:\Users\a.zolotarev.MFCKGN\Documents\NetBeansProjects\serverGlassfish\src\main\
 C:\Users\a.zolotarev.MFCKGN\Documents\NetBeansProjects\serverGlassfish\src\main\java\com\mycompany\serverglassfish\model\Parameter.java
 C:\Users\a.zolotarev.MFCKGN\Documents\NetBeansProjects\serverGlassfish\src\main\java\com\mycompany\serverglassfish\services\AreaServlet.java
 C:\Users\a.zolotarev.MFCKGN\Documents\NetBeansProjects\serverGlassfish\src\main\java\com\mycompany\serverglassfish\services\SupplyServlet.java
+C:\Users\a.zolotarev.MFCKGN\Documents\NetBeansProjects\serverGlassfish\src\main\java\com\mycompany\serverglassfish\model\EquipmentInventory_.java
 C:\Users\a.zolotarev.MFCKGN\Documents\NetBeansProjects\serverGlassfish\src\main\java\com\mycompany\serverglassfish\model\Equipment.java
 C:\Users\a.zolotarev.MFCKGN\Documents\NetBeansProjects\serverGlassfish\src\main\java\com\mycompany\serverglassfish\model\FileDump.java
 C:\Users\a.zolotarev.MFCKGN\Documents\NetBeansProjects\serverGlassfish\src\main\java\com\mycompany\serverglassfish\DAO\ExceptionConverter.java
@@ -45,6 +46,7 @@ C:\Users\a.zolotarev.MFCKGN\Documents\NetBeansProjects\serverGlassfish\src\main\
 C:\Users\a.zolotarev.MFCKGN\Documents\NetBeansProjects\serverGlassfish\src\main\java\com\mycompany\serverglassfish\DAO\HibernateUtil.java
 C:\Users\a.zolotarev.MFCKGN\Documents\NetBeansProjects\serverGlassfish\src\main\java\com\mycompany\serverglassfish\services\GenericManyToMany.java
 C:\Users\a.zolotarev.MFCKGN\Documents\NetBeansProjects\serverGlassfish\src\main\java\com\mycompany\serverglassfish\services\PostServlet.java
+C:\Users\a.zolotarev.MFCKGN\Documents\NetBeansProjects\serverGlassfish\src\main\java\com\mycompany\serverglassfish\services\InventoryLogServlet.java
 C:\Users\a.zolotarev.MFCKGN\Documents\NetBeansProjects\serverGlassfish\src\main\java\com\mycompany\serverglassfish\model\Supply.java
 C:\Users\a.zolotarev.MFCKGN\Documents\NetBeansProjects\serverGlassfish\src\main\java\com\mycompany\serverglassfish\model\EquipmentStateLog.java
 C:\Users\a.zolotarev.MFCKGN\Documents\NetBeansProjects\serverGlassfish\src\main\java\com\mycompany\serverglassfish\services\GenericServlet.java

@@ -48,7 +48,6 @@ public class InventoryEditLog {
       
     @ManyToOne
     @JoinColumn(name="equipment_inventory_id")
-    @SerializedName("mStateModel")
     private EquipmentInventory equipmentInventory;
 
     public int getId() {
@@ -73,6 +72,10 @@ public class InventoryEditLog {
 
     public void setEquipmentInventory(EquipmentInventory equipmentInventory) {
         this.equipmentInventory = equipmentInventory;
+    }
+    
+    public String getEquipmentFieldName(){
+        return "equipmentInventory";
     }
 
     public String getInventoryNumber() {
