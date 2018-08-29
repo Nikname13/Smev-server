@@ -6,6 +6,7 @@
 package com.mycompany.serverglassfish.services;
 
 import com.google.gson.Gson;
+import com.mycompany.serverglassfish.model.EquipmentInventory;
 import com.mycompany.serverglassfish.model.EquipmentInventory_;
 import com.mycompany.serverglassfish.model.InventoryEditLog;
 import gson.GsonUtil;
@@ -29,6 +30,15 @@ public class InventoryLogServlet extends GenericManyToManyServlet<InventoryEditL
     }
 
     @Override
+    public Gson getGson() {
+        return new GsonUtil()
+                .addExclusion(InventoryEditLog.class, "equipmentInventory")
+                .getGson();
+    }
+    
+    
+
+    @Override
     public Gson getGsonFromList() {
         return new GsonUtil()
                 .addExclusion(InventoryEditLog.class, "equipmentInventory")
@@ -37,7 +47,7 @@ public class InventoryLogServlet extends GenericManyToManyServlet<InventoryEditL
 
     @Override
     public String getNameField(String type) {
-        return super.getNameField(type); //To change body of generated methods, choose Tools | Templates.
+        return new InventoryEditLog().getEquipmentFieldName();
     }
     
     
