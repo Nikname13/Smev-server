@@ -52,7 +52,7 @@ public class Equipment implements Serializable {
     @JoinColumn(name="type_id", nullable=false)
     @SerializedName("mTypeModel")
     private Type type;
-    /*добавить исключение в сервлет*/
+
     @OneToMany(mappedBy="equipment", cascade=CascadeType.ALL)
     @SerializedName("mEntityList")
     private List<EquipmentParameter> eq_parameters=new ArrayList<>();
@@ -127,6 +127,4 @@ public class Equipment implements Serializable {
         eq_inv.setEquipment(this);
         
     }
-    
-    
 }

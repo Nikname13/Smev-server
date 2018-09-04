@@ -10,7 +10,7 @@ import com.mycompany.serverglassfish.model.Area;
 import com.mycompany.serverglassfish.model.Department;
 import com.mycompany.serverglassfish.model.Equipment;
 import com.mycompany.serverglassfish.model.EquipmentInventory;
-import com.mycompany.serverglassfish.model.EquipmentStateLog;
+import com.mycompany.serverglassfish.model.StateLog;
 import com.mycompany.serverglassfish.model.FileDump;
 import com.mycompany.serverglassfish.model.InventoryNumber;
 import com.mycompany.serverglassfish.model.Location;

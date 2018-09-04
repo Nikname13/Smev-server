@@ -23,7 +23,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="equipment_state_log")
-public class EquipmentStateLog implements Serializable {
+public class StateLog implements Serializable {
    
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -85,6 +85,10 @@ public class EquipmentStateLog implements Serializable {
 
     public void setEquipmentInventoryLog(EquipmentInventory equipmentInventoryLog) {
         this.equipmentInventoryLog = equipmentInventoryLog;
+    }
+    
+    public String getEquipmentFieldName(){
+        return "equipmentInventoryLog";
     }
 
     

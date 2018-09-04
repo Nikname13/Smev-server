@@ -10,7 +10,7 @@ import com.mycompany.serverglassfish.model.Area;
 import com.mycompany.serverglassfish.model.Department;
 import com.mycompany.serverglassfish.model.Equipment;
 import com.mycompany.serverglassfish.model.EquipmentInventory;
-import com.mycompany.serverglassfish.model.EquipmentStateLog;
+import com.mycompany.serverglassfish.model.StateLog;
 import com.mycompany.serverglassfish.model.FileDump;
 import com.mycompany.serverglassfish.model.InventoryEditLog;
 import com.mycompany.serverglassfish.model.InventoryNumber;
@@ -35,7 +35,7 @@ public class EquipmentInventoryServlet extends GenericCRUDServlet<EquipmentInven
     @Override
     public void setField(EquipmentInventory entity) {
         if(entity.getEquipmentStates()!=null){
-            for(EquipmentStateLog state : entity.getEquipmentStates()){
+            for(StateLog state : entity.getEquipmentStates()){
                 state.setEquipmentInventoryLog(entity);
             }
         }
@@ -58,7 +58,7 @@ public class EquipmentInventoryServlet extends GenericCRUDServlet<EquipmentInven
                 .addExclusion(EquipmentInventory.class,"equipmentStates")
                 .addExclusion(InventoryNumber.class, "supply")
                 .addExclusion(InventoryNumber.class, "eq_inventoryList")
-                .addExclusion(EquipmentStateLog.class, "equipmentState")
+                .addExclusion(StateLog.class, "equipmentState")
                 .addExclusion(State.class, "equipmentInventoryList")
                 .addExclusion(Department.class, "area")
                 .addExclusion(Department.class,"purchaseListDepartment")
@@ -77,7 +77,7 @@ public class EquipmentInventoryServlet extends GenericCRUDServlet<EquipmentInven
                 .addExclusion(InventoryNumber.class, "supply")
                 .addExclusion(InventoryNumber.class, "eq_inventoryList")
                 .addExclusion(InventoryEditLog.class, "equipmentInventory")
-                .addExclusion(EquipmentStateLog.class,"equipmentInventoryLog")
+                .addExclusion(StateLog.class,"equipmentInventoryLog")
                 .addExclusion(State.class, "equipmentInventoryList")
                 .addExclusion(Department.class, "area")
                 .addExclusion(Department.class,"purchaseListDepartment")

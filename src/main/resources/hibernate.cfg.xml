@@ -60,7 +60,7 @@ Contributor(s):
     <mapping class="com.mycompany.serverglassfish.model.Supply"/>
     <mapping class="com.mycompany.serverglassfish.model.InventoryNumber"/>
     <mapping class="com.mycompany.serverglassfish.model.EquipmentInventory"/>
-    <mapping class="com.mycompany.serverglassfish.model.EquipmentStateLog"/>
+    <mapping class="com.mycompany.serverglassfish.model.StateLog"/>
     <mapping class="com.mycompany.serverglassfish.model.Area"/>
     <mapping class="com.mycompany.serverglassfish.model.Location"/>
     <mapping class="com.mycompany.serverglassfish.model.Worker"/>
