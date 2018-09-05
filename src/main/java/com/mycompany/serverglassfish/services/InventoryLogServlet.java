@@ -40,9 +40,7 @@ public class InventoryLogServlet extends GenericManyToManyServlet<InventoryEditL
 
     @Override
     public Gson getGsonFromList() {
-        return new GsonUtil()
-                .addExclusion(InventoryEditLog.class, "equipmentInventory")
-                .getGson();
+        return getGson();
     }
 
     @Override

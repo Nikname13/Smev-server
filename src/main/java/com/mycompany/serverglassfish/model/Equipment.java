@@ -58,7 +58,6 @@ public class Equipment implements Serializable {
     private List<EquipmentParameter> eq_parameters=new ArrayList<>();
     
     @OneToMany(mappedBy="equipmentInv")
-    @SerializedName("mEqInventoryList")
     private List<EquipmentInventory> eq_inventory=new ArrayList<>();
 
     public int getId() {

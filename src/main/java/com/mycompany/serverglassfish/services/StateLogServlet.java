@@ -37,16 +37,11 @@ public class StateLogServlet extends GenericManyToManyServlet<StateLog> {
 
     @Override
     public Gson getGsonFromList() {
-        return new GsonUtil()
-                .addExclusion(StateLog.class, "equipmentInventoryLog")
-                .getGson();
+        return getGson();
     }
 
     @Override
     public String getNameField(String type) {
         return new StateLog().getEquipmentFieldName();
-    }
-    
-    
-    
+    }  
 }

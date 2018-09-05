@@ -50,37 +50,20 @@ public class EquipmentServlet extends GenericCRUDServlet<Equipment> {
         return new GsonUtil()
                 .addExclusion(Type.class, "parameters")
                 .addExclusion(Type.class, "equipments")
-                .addExclusion(EquipmentParameter.class,"equipment")
-                .addExclusion(Parameter.class,"values")
-                .addExclusion(Parameter.class, "types")
-                .addExclusion(Parameter.class, "eq_parameter")
                 .addExclusion(Equipment.class, "eq_inventory")
                 .addExclusion(Equipment.class, "eq_parameters")
                 .getGson();
     }
 
     @Override
-    public Gson getGsonFromEntity() {
+    public Gson getGson() {
         return new GsonUtil()
                 .addExclusion(Type.class, "equipments")
                 .addExclusion(EquipmentParameter.class, "equipment")
                 .addExclusion(Parameter.class,"values")
                 .addExclusion(Parameter.class, "types")
                 .addExclusion(Parameter.class, "eq_parameter")
-                .addExclusion(EquipmentInventory.class,"equipmentInv")
-                .addExclusion(EquipmentInventory.class,"inventoryEditLogs")
-                .addExclusion(EquipmentInventory.class, "equipmentStates")
-                .addExclusion(State.class, "equipmentInventoryList")
-                .addExclusion(InventoryNumber.class, "supply")
-                .addExclusion(InventoryNumber.class, "eq_inventoryList")
-                .addExclusion(Department.class, "area")
-                .addExclusion(Department.class, "purchaseListDepartment")
-                .addExclusion(Department.class, "locationsListDepartment")
-                .addExclusion(Worker.class, "departmentWorker")
-                .addExclusion(Post.class, "workerList")
-                .addExclusion(Department.class, "equipmentList")
-                .addExclusion(Department.class, "avatar")
-                .addExclusion(FileDump.class,"equipmentAvatar")
+                .addExclusion(Equipment.class,"eq_inventory")
                 .getGson();
     }    
 }

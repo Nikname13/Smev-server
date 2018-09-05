@@ -40,9 +40,9 @@ public class EquipmentParameter implements Serializable {
     @SerializedName("mParameterModel")
     private Parameter parameter;
     
-    @Column(name="value")
+    @Column(name="parameterValue")
     @SerializedName("mName")
-    private String value;
+    private String parameterValue;
 
     public int getId() {
         return id;
@@ -69,10 +69,14 @@ public class EquipmentParameter implements Serializable {
     }
 
     public String getValue() {
-        return value;
+        return parameterValue;
     }
 
     public void setValue(String value) {
-        this.value = value;
+        this.parameterValue = value;
+    }
+    
+    public String getEquipmentFieldName(){
+        return "equipment";
     }
 }

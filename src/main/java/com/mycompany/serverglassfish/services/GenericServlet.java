@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public interface GenericServlet<T> {
     
-    Gson getGsonFromEntity();//переопределяемый метод. исключение полей из Gson для одной сущности
+    Gson getGson();//переопределяемый метод. исключение полей из Gson для одной сущности
     Gson getGsonFromList();//переопределяемый метод. исключение полей из Gson для листа
     void setField (T entity);//переопределяемый метод. добавление ссылки на сущность
     T getTypeFromJson(HttpServletRequest req) throws IOException;//из json в сущность

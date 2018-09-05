@@ -6,7 +6,9 @@
 package com.mycompany.serverglassfish.services;
 
 
+import com.google.gson.Gson;
 import com.mycompany.serverglassfish.model.ValueParameter;
+import gson.GsonUtil;
 import javax.servlet.annotation.WebServlet;
 
 
@@ -19,6 +21,16 @@ public class ValueParameterServlet extends GenericCRUDServlet<ValueParameter> {
 
     public ValueParameterServlet() {
         super(ValueParameter.class);
+    }
+
+    @Override
+    public Gson getGson() {
+        return new GsonUtil().getGson();
+    }
+
+    @Override
+    public Gson getGsonFromList() {
+        return new GsonUtil().getGson();
     }
 
 }

@@ -33,7 +33,7 @@ public class TypeServlet extends GenericCRUDServlet<Type>{
     }
 
     @Override
-    public Gson getGsonFromEntity() {
+    public Gson getGson() {
         return new GsonUtil()
                 .addExclusion(Type.class, "equipments")
                 .addExclusion(Parameter.class, "values")

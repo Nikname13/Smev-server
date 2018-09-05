@@ -24,14 +24,11 @@ public class SupplyServlet extends GenericCRUDServlet<Supply> {
 
     @Override
     public Gson getGsonFromList() {
-        return new GsonUtil()
-                .addExclusion(Provider.class, "supplys")
-                .addExclusion(Supply.class, "inventoryList")
-                .getGson();
+        return getGson();
     }
 
     @Override
-    public Gson getGsonFromEntity() {
+    public Gson getGson() {
         return new GsonUtil()
                 .addExclusion(Provider.class, "supplys")
                 .addExclusion(Supply.class, "inventoryList")

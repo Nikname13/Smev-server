@@ -23,13 +23,11 @@ public class AreaServlet extends GenericCRUDServlet<Area> {
 
     @Override
     public Gson getGsonFromList() {
-        return new GsonUtil()
-                .addExclusion(Area.class,"departmentsListArea")
-                .getGson();
+        return getGson();
     }
 
     @Override
-    public Gson getGsonFromEntity() {
+    public Gson getGson() {
         return new GsonUtil()
                 .addExclusion(Area.class,"departmentsListArea")
                 .getGson();

@@ -10,6 +10,7 @@ import com.mycompany.serverglassfish.model.Area;
 import com.mycompany.serverglassfish.model.Department;
 import com.mycompany.serverglassfish.model.Equipment;
 import com.mycompany.serverglassfish.model.EquipmentInventory;
+import com.mycompany.serverglassfish.model.EquipmentInventory_;
 import com.mycompany.serverglassfish.model.StateLog;
 import com.mycompany.serverglassfish.model.FileDump;
 import com.mycompany.serverglassfish.model.InventoryEditLog;
@@ -19,6 +20,7 @@ import com.mycompany.serverglassfish.model.State;
 import com.mycompany.serverglassfish.model.Worker;
 
 import gson.GsonUtil;
+import javax.persistence.metamodel.SingularAttribute;
 import javax.servlet.annotation.WebServlet;
 
 /**
@@ -26,7 +28,7 @@ import javax.servlet.annotation.WebServlet;
  * @author a.zolotarev
  */
 @WebServlet(name = "EquipmentInventoryServlet", urlPatterns = {"/equipmentInventory_servlet"})
-public class EquipmentInventoryServlet extends GenericCRUDServlet<EquipmentInventory> {
+public class EquipmentInventoryServlet extends GenericManyToManyServlet<EquipmentInventory> {
     
     public EquipmentInventoryServlet() {
         super(EquipmentInventory.class);
@@ -45,48 +47,51 @@ public class EquipmentInventoryServlet extends GenericCRUDServlet<EquipmentInven
             }
         }
     }
-    
-    
 
     @Override
-    public Gson getGsonFromList() {
-        return new GsonUtil()
-                .addExclusion(Equipment.class,"eq_parameters")
-                .addExclusion(Equipment.class,"eq_inventory")
-                .addExclusion(Equipment.class, "type")
-                .addExclusion(EquipmentInventory.class,"inventoryEditLogs")
-                .addExclusion(EquipmentInventory.class,"equipmentStates")
-                .addExclusion(InventoryNumber.class, "supply")
-                .addExclusion(InventoryNumber.class, "eq_inventoryList")
-                .addExclusion(StateLog.class, "equipmentState")
-                .addExclusion(State.class, "equipmentInventoryList")
-                .addExclusion(Department.class, "area")
-                .addExclusion(Department.class,"purchaseListDepartment")
-                .addExclusion(Department.class, "locationsListDepartment")
-                .addExclusion(Department.class, "workersListDepartmnet")
-                .addExclusion(Department.class, "equipmentList")
-                .getGson();
+    public SingularAttribute getId() {
+        return EquipmentInventory_.id;
     }
 
     @Override
-    public Gson getGsonFromEntity() {
+    public String getNameField(String type) {
+        switch(type){
+            case "equipment": return new EquipmentInventory().getEquipmentFieldName();
+            case "department": return new EquipmentInventory().getDepartmentFieldName();
+        }
+        return "not field";
+    }
+    
+    
+    
+    @Override
+    public Gson getGsonFromList() {
+        return getGson();
+    }
+
+    @Override
+    public Gson getGson() {
         return new GsonUtil()
                 .addExclusion(Equipment.class,"eq_parameters")
                 .addExclusion(Equipment.class,"eq_inventory")
                 .addExclusion(Equipment.class, "type")
+                
                 .addExclusion(InventoryNumber.class, "supply")
                 .addExclusion(InventoryNumber.class, "eq_inventoryList")
-                .addExclusion(InventoryEditLog.class, "equipmentInventory")
-                .addExclusion(StateLog.class,"equipmentInventoryLog")
+                
+                .addExclusion(EquipmentInventory.class,"inventoryEditLogs")
+                .addExclusion(EquipmentInventory.class,"equipmentStates")
+                
                 .addExclusion(State.class, "equipmentInventoryList")
+                
                 .addExclusion(Department.class, "area")
-                .addExclusion(Department.class,"purchaseListDepartment")
+                .addExclusion(Department.class, "purchaseListDepartment")
                 .addExclusion(Department.class, "locationsListDepartment")
-                .addExclusion(Worker.class, "departmentWorker")
-                .addExclusion(Post.class, "workerList")
+                .addExclusion(Department.class, "workersListDepartmnet")
                 .addExclusion(Department.class, "equipmentList")
                 .addExclusion(Department.class, "avatar")
-                .addExclusion(FileDump.class,"equipmentAvatar")
+                
+                .addExclusion(FileDump.class, "equipmentAvatar")
                 .getGson();
     }
 

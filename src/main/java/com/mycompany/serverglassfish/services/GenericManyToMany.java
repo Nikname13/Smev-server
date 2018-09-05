@@ -14,7 +14,7 @@ import javax.persistence.metamodel.SingularAttribute;
  */
 public interface GenericManyToMany {
     
-     String getNameField(String type);//переопределяемы метод. получение наименования поля, по которому связаны таблицы, для поиска
+ String getNameField(String type);//переопределяемы метод. получение наименования поля, по которому связаны таблицы, для поиска
  Gson getGson();//переопределяемый метод. исключение полей из Gson
  SingularAttribute getId();//переопределяемый метод. получение id по которуму происходит выборка
 }

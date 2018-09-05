@@ -21,15 +21,12 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author a.zolotarev
  */
-public class GenericManyToManyServlet<T> extends GenericCRUDServlet<T> implements GenericManyToMany {
+public abstract class GenericManyToManyServlet<T> extends GenericCRUDServlet<T> implements GenericManyToMany {
     
     public GenericManyToManyServlet(Class<T> persistentClass) {
         super(persistentClass);
     }
-    @Override
-    public String getNameField(String type){
-        return "";
-    }  
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         GenericHibernateDAO dao = new GenericHibernateDAO(getPersistentClass());
@@ -43,19 +40,10 @@ public class GenericManyToManyServlet<T> extends GenericCRUDServlet<T> implement
         }
         dao.closeSession();
     }
-
-    @Override
-    public Gson getGsonFromList() {
-        return new GsonUtil().getGson();
-    }
-   
-    @Override
-    public Gson getGson() {
-        return new GsonUtil().getGson();
-    }
-    @Override
-    public SingularAttribute getId() {
-        return null;
-    }
     
+    @Override
+    public abstract SingularAttribute getId();
+        
+    @Override
+    public abstract String getNameField(String type);  
 }

@@ -40,7 +40,7 @@ public class MovementServlet extends GenericCRUDServlet<MovementLog>{
     }
 
     @Override
-    public Gson getGsonFromEntity() {
+    public Gson getGson() {
         return new GsonUtil()
                 .addExclusion(MovementDepartment.class,"departmentMovement")
                 .addExclusion(MovementEquipment.class,"equipmentMovement")

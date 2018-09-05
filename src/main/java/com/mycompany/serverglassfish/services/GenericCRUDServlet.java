@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author a.zolotarev
  */
-public class GenericCRUDServlet<T> extends HttpServlet implements GenericServlet<T> {
+public abstract class GenericCRUDServlet<T> extends HttpServlet implements GenericServlet<T> {
     
     private Class<T> persistentClass;
 
@@ -32,7 +32,7 @@ public class GenericCRUDServlet<T> extends HttpServlet implements GenericServlet
     }
     
     private String getJson(T p){
-        String json=getGsonFromEntity().toJson(p);
+        String json=getGson().toJson(p);
         System.out.print("out = "+json);
         return json;
     }
@@ -102,21 +102,16 @@ public class GenericCRUDServlet<T> extends HttpServlet implements GenericServlet
         final T p = getTypeFromJson(req);
         setField(p);
         String error=dao.update(p);
-        
         System.out.print("out parameter= ");
         //print(p);
         respEncoding(resp).getWriter().write(getJson(p));
     }
         
      @Override
-    public Gson getGsonFromEntity() {
-        return new GsonUtil().getGson();
-    }
+    public abstract Gson getGson();
 
     @Override
-    public Gson getGsonFromList() {
-        return new GsonUtil().getGson();
-    }
+    public abstract Gson getGsonFromList();
 
     @Override
     public void setField(T entity) {

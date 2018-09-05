@@ -84,5 +84,9 @@ public class Worker implements Serializable{
     public void setDepartmentWorker(Department departmentWorker) {
         this.departmentWorker = departmentWorker;
     }
+    
+    public static String getDepartmentFildName(){
+        return "departmentWorker";
+    }
        
 }

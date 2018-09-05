@@ -23,13 +23,11 @@ public class PostServlet extends GenericCRUDServlet<Post> {
 
     @Override
     public Gson getGsonFromList() {
-        return new GsonUtil()
-                .addExclusion(Post.class, "workerList")
-                .getGson();
+        return getGson();
     }
 
     @Override
-    public Gson getGsonFromEntity() {
+    public Gson getGson() {
         return new GsonUtil()
                 .addExclusion(Post.class, "workerList")
                 .getGson();

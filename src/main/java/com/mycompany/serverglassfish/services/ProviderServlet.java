@@ -23,13 +23,11 @@ public class ProviderServlet extends GenericCRUDServlet<Provider> {
 
     @Override
     public Gson getGsonFromList() {
-        return new GsonUtil()
-                .addExclusion(Provider.class, "supplys")
-                .getGson();
+        return getGson();
     }
 
     @Override
-    public Gson getGsonFromEntity() {
+    public Gson getGson() {
         return new GsonUtil()
                 .addExclusion(Provider.class, "supplys")
                 .getGson();

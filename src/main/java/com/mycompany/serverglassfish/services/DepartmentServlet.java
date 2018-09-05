@@ -36,29 +36,20 @@ public class DepartmentServlet extends GenericCRUDServlet<Department> {
     public Gson getGsonFromList() {
         return new GsonUtil()
                 .addExclusion(Area.class, "departmentsListArea")
-                .addExclusion(Department.class,"purchaseListDepartment")
                 .addExclusion(Department.class, "workersListDepartmnet")
+                .addExclusion(Department.class, "purchaseListDepartment")
                 .addExclusion(Department.class, "equipmentList")
                 .getGson();
     }
 
     @Override
-    public Gson getGsonFromEntity() {
+    public Gson getGson() {
         return new GsonUtil()
                 .addExclusion(Area.class, "departmentsListArea")
-                .addExclusion(Purchase.class, "departmentPurchase")
+                .addExclusion(Department.class,"purchaseListDepartment")
                 .addExclusion(Worker.class, "departmentWorker")
                 .addExclusion(Post.class, "workerList")
-                .addExclusion(InventoryNumber.class, "supply")
-                .addExclusion(InventoryNumber.class, "eq_inventoryList")
-                .addExclusion(EquipmentInventory.class,"inventoryEditLogs")
-                .addExclusion(EquipmentInventory.class,"equipmentStates")
-                .addExclusion(State.class, "equipmentInventoryList")
-                .addExclusion(Equipment.class, "eq_parameters")
-                .addExclusion(Equipment.class, "eq_inventory")
-                .addExclusion(Equipment.class, "type")
-                .addExclusion(EquipmentInventory.class, "departmentEquipment")
-                .addExclusion(EquipmentInventory.class, "avatar")
+                .addExclusion(Department.class, "equipmentList")
                 .addExclusion(FileDump.class,"departmentAvatar")
                 .getGson();
     }

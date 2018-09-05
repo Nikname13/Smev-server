@@ -25,15 +25,11 @@ public class InventoryNumberServlet extends GenericCRUDServlet<InventoryNumber> 
 
     @Override
     public Gson getGsonFromList() {
-        return new GsonUtil()
-                .addExclusion(Supply.class, "provider")
-                .addExclusion(Supply.class, "inventoryList")
-                .addExclusion(InventoryNumber.class, "eq_inventoryList")
-                .getGson();           
+        return getGson();         
     }
 
     @Override
-    public Gson getGsonFromEntity() {
+    public Gson getGson() {
         return new GsonUtil()
                 .addExclusion(Supply.class, "provider")
                 .addExclusion(Supply.class, "inventoryList")

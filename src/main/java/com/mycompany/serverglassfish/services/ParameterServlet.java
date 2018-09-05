@@ -45,7 +45,7 @@ public class ParameterServlet extends GenericCRUDServlet<Parameter> {
     }
 
     @Override
-    public Gson getGsonFromEntity() {
+    public Gson getGson() {
         System.out.print("getGsonFromEntity Parameter");
         return new GsonUtil()
                 .addExclusion(Parameter.class, "eq_parameter")

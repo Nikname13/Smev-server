@@ -30,7 +30,7 @@ public class PurchaseServlet extends GenericCRUDServlet<Purchase> {
     }
 
     @Override
-    public Gson getGsonFromEntity() {
+    public Gson getGson() {
         return new GsonUtil()
                 .addExclusion(Department.class, "area")
                 .addExclusion(Department.class, "purchaseListDepartment")

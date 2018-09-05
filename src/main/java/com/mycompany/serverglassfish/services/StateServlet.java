@@ -25,13 +25,11 @@ public class StateServlet extends GenericCRUDServlet<State> {
 
     @Override
     public Gson getGsonFromList() {
-        return new GsonUtil()
-                .addExclusion(State.class, "equipmentInventoryList")
-                .getGson();
+        return getGson();
     }
 
     @Override
-    public Gson getGsonFromEntity() {
+    public Gson getGson() {
         return new GsonUtil()
                 .addExclusion(State.class, "equipmentInventoryList")
                 .getGson();
