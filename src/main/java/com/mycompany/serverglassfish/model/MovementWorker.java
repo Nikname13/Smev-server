@@ -34,7 +34,7 @@ public class MovementWorker {
     private String name;
     
     @Column(name="post", nullable=false)
-    @SerializedName("mPost")
+    @SerializedName("mWorkerPost")
     private String post;
     
     @Column(name="worker_id", nullable=false)
@@ -42,7 +42,7 @@ public class MovementWorker {
     private int workerId;
     
     @ManyToOne
-    @JoinColumn(name="movement_id")
+    @JoinColumn(name="movement_id", nullable=false)
     @SerializedName("mWorkerMovement")
     private MovementLog workerMovement;
 

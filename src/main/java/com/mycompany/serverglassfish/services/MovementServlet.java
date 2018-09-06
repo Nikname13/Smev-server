@@ -31,6 +31,21 @@ public class MovementServlet extends GenericCRUDServlet<MovementLog>{
     }
 
     @Override
+    public void setField(MovementLog entity) {
+        for(MovementWorker worker:entity.getWorkersList()){
+            worker.setWorkerMovement(entity);
+        }
+        for(MovementDepartment department:entity.getDepartmentsList()){
+            department.setDepartmentMovement(entity);
+        }
+        for(MovementEquipment equipment:entity.getEquipmentsList()){
+            equipment.setEquipmentMovement(entity);
+        }
+    }
+    
+    
+
+    @Override
     public Gson getGsonFromList() {
         return new GsonUtil()
                 .addExclusion(MovementLog.class, "departmentsList")

@@ -20,7 +20,7 @@ import javax.persistence.Table;
  * @author a.zolotarev
  */
 @Entity
-@Table(name="movement_dapartment")
+@Table(name="movement_department")
 public class MovementDepartment {
     
     @Id
@@ -34,7 +34,7 @@ public class MovementDepartment {
     private String name;
     
     @Column(name="department_number", nullable=false)
-    @SerializedName("mDepartmentNumber")
+    @SerializedName("mNumber")
     private String departmentNumber;
     
     @Column(name="department_id", nullable=false)
@@ -42,7 +42,7 @@ public class MovementDepartment {
     private int departmentId;
     
     @ManyToOne
-    @JoinColumn(name="movement_id")
+    @JoinColumn(name="movement_id", nullable=false)
     @SerializedName("mDepartmentMovement")
     private MovementLog departmentMovement;
 

@@ -41,7 +41,7 @@ public class MovementEquipment {
     private int equipmentId;
     
     @ManyToOne
-    @JoinColumn(name="movement_id")
+    @JoinColumn(name="movement_id",nullable=false)
     @SerializedName("mEquipmentMovement")
     private MovementLog equipmentMovement;
 
