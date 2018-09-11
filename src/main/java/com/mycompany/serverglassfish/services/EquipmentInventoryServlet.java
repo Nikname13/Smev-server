@@ -20,6 +20,7 @@ import com.mycompany.serverglassfish.model.State;
 import com.mycompany.serverglassfish.model.Worker;
 
 import gson.GsonUtil;
+import javax.persistence.metamodel.SetAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.servlet.annotation.WebServlet;
 
@@ -49,17 +50,17 @@ public class EquipmentInventoryServlet extends GenericManyToManyServlet<Equipmen
     }
 
     @Override
-    public SingularAttribute getId() {
+    public SingularAttribute getSearchField(String type) {
         return EquipmentInventory_.id;
     }
 
     @Override
-    public String getNameField(String type) {
+    public String getJoinField(String type) {
         switch(type){
-            case "equipment": return new EquipmentInventory().getEquipmentFieldName();
-            case "department": return new EquipmentInventory().getDepartmentFieldName();
+            case "equipment": return EquipmentInventory_.EQUIPMENT_INV;
+            case "department": return EquipmentInventory_.DEPARTMENT_EQUIPMENT;
         }
-        return "not field";
+        return null;
     }
     
     

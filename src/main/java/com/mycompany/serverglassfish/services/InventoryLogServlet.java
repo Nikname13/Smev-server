@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import com.mycompany.serverglassfish.model.EquipmentInventory;
 import com.mycompany.serverglassfish.model.EquipmentInventory_;
 import com.mycompany.serverglassfish.model.InventoryEditLog;
+import com.mycompany.serverglassfish.model.InventoryEditLog_;
 import gson.GsonUtil;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.servlet.annotation.WebServlet;
@@ -25,7 +26,7 @@ public class InventoryLogServlet extends GenericManyToManyServlet<InventoryEditL
     }
 
     @Override
-    public SingularAttribute getId() {
+    public SingularAttribute getSearchField(String type) {
         return EquipmentInventory_.id;
     }
 
@@ -44,8 +45,8 @@ public class InventoryLogServlet extends GenericManyToManyServlet<InventoryEditL
     }
 
     @Override
-    public String getNameField(String type) {
-        return new InventoryEditLog().getEquipmentFieldName();
+    public String getJoinField(String type) {
+        return InventoryEditLog_.EQUIPMENT_INVENTORY;
     }
     
     

@@ -3,14 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.serverglassfish.model;
-
-import javax.persistence.metamodel.SingularAttribute;
+package com.mycompany.serverglassfish.DAO;
 
 /**
  *
  * @author a.zolotarev
  */
-public class Department_ {
-    public static volatile SingularAttribute<Department,Integer> id;
+public class GenericType<T> {
+    private T value;
+
+    public GenericType(T value) {
+        this.value = value;
+    }
+
+    public T getValue() {
+        return value;
+    } 
 }

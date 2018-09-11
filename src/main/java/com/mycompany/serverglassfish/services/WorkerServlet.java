@@ -10,6 +10,7 @@ import com.mycompany.serverglassfish.model.Department;
 import com.mycompany.serverglassfish.model.Department_;
 import com.mycompany.serverglassfish.model.Post;
 import com.mycompany.serverglassfish.model.Worker;
+import com.mycompany.serverglassfish.model.Worker_;
 import gson.GsonUtil;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.servlet.annotation.WebServlet;
@@ -52,13 +53,13 @@ public class WorkerServlet extends GenericManyToManyServlet<Worker> {
     }
 
     @Override
-    public SingularAttribute getId() {
-        return Department_.id;
+    public SingularAttribute getSearchField(String type) {
+                return Department_.id;
     }
 
     @Override
-    public String getNameField(String type) {
-        return Worker.getDepartmentFildName();
+    public String getJoinField(String type) {
+        return Worker_.DEPARTMENT_WORKER;
     }
   
 }

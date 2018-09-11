@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import com.mycompany.serverglassfish.model.Department;
 import com.mycompany.serverglassfish.model.Department_;
 import com.mycompany.serverglassfish.model.Location;
+import com.mycompany.serverglassfish.model.Location_;
 import gson.GsonUtil;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.servlet.annotation.WebServlet;
@@ -25,8 +26,8 @@ public class LocationServlet extends GenericManyToManyServlet<Location> {
     }
 
     @Override
-    public SingularAttribute getId() {
-        return Department_.id;
+    public SingularAttribute getSearchField(String type) {
+                return Department_.id;     
     }
 
     @Override
@@ -46,8 +47,8 @@ public class LocationServlet extends GenericManyToManyServlet<Location> {
     }
 
     @Override
-    public String getNameField(String type) {
-        return new Location().getDepartmentFieldName();
+    public String getJoinField(String type) {
+        return Location_.DEPARTMENTS_LIST_LOCATION;
     }
     
     

@@ -178,12 +178,4 @@ public class EquipmentInventory implements Serializable{
     public FileDump getAvatar() {
         return avatar;
     }
-    
-    public String getDepartmentFieldName(){
-        return "departmentEquipment";
-    }
-    
-    public String getEquipmentFieldName(){
-        return "equipmentInv";
-    }
 }

@@ -75,8 +75,4 @@ public class EquipmentParameter implements Serializable {
     public void setValue(String value) {
         this.parameterValue = value;
     }
-    
-    public String getEquipmentFieldName(){
-        return "equipment";
-    }
 }

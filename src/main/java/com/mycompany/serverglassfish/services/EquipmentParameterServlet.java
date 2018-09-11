@@ -7,6 +7,7 @@ package com.mycompany.serverglassfish.services;
 
 import com.google.gson.Gson;
 import com.mycompany.serverglassfish.model.EquipmentParameter;
+import com.mycompany.serverglassfish.model.EquipmentParameter_;
 import com.mycompany.serverglassfish.model.Equipment_;
 import com.mycompany.serverglassfish.model.Parameter;
 import gson.GsonUtil;
@@ -25,13 +26,13 @@ public class EquipmentParameterServlet extends GenericManyToManyServlet<Equipmen
     }
 
     @Override
-    public SingularAttribute getId() {
+    public SingularAttribute getSearchField(String type) {
         return Equipment_.id;
     }
 
     @Override
-    public String getNameField(String type) {
-        return new EquipmentParameter().getEquipmentFieldName();
+    public String getJoinField(String type) {
+        return  EquipmentParameter_.EQUIPMENT;
     }
 
     @Override

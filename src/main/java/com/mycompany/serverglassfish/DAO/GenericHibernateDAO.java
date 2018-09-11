@@ -16,6 +16,9 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Root;
+import javax.persistence.criteria.SetJoin;
+import javax.persistence.criteria.Subquery;
+import javax.persistence.metamodel.SetAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import org.hibernate.Session;
 
@@ -118,14 +121,15 @@ public class GenericHibernateDAO<T, ID extends Serializable> implements GenericD
         return "";
     }
 
-    public List<T> getList(Integer id, SingularAttribute id_, String field) {
+    public List<T> getList(GenericType criterion, SingularAttribute searchField_, String joinField) {
         System.out.println("get DownLoadList ");
         CriteriaBuilder builder = getSession().getCriteriaBuilder();
         CriteriaQuery<T> cr = builder.createQuery(getPersistentClass());
         Root<T> pRoot = cr.from(getPersistentClass());
+        
         cr.select(pRoot);
-        Join<T, Object> joi = pRoot.join(field);
-        cr.where(builder.equal(joi.get(id_), id));
+        Join<T, Object> joi = pRoot.join(joinField);
+        cr.where(builder.equal(joi.get(searchField_), criterion.getValue()));
         cr.orderBy(builder.asc(pRoot.get("id")));
         List<T> list = getSession().createQuery(cr).getResultList();
         System.out.println("Files list");

@@ -68,8 +68,4 @@ public class Location implements Serializable{
         this.departmentsListLocation = departmentsList;
     }
     
-    public String getDepartmentFieldName(){
-        return "departmentsListLocation";
-    }
-    
 }

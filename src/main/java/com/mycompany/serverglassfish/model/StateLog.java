@@ -86,10 +86,4 @@ public class StateLog implements Serializable {
     public void setEquipmentInventoryLog(EquipmentInventory equipmentInventoryLog) {
         this.equipmentInventoryLog = equipmentInventoryLog;
     }
-    
-    public String getEquipmentFieldName(){
-        return "equipmentInventoryLog";
-    }
-
-    
 }

@@ -63,11 +63,11 @@ public class GenericFileServlet<T> extends HttpServlet implements GenericFile {
         GenericHibernateDAO dao = new GenericHibernateDAO(getPersistentClass());
         
         String type=req.getParameter("type");
-        List<FileDump> fileDumpList=dao.getList(Integer.valueOf(req.getParameter("id")), id_, getNameField(type));
-        for(FileDump file:fileDumpList){
-            System.out.println(file.getId());
-        }
-        resp.getWriter().write(getGson().toJson(fileDumpList));
+//        List<FileDump> fileDumpList=dao.getList(Integer.valueOf(req.getParameter("id")), id_, getNameField(type));
+//        for(FileDump file:fileDumpList){
+//            System.out.println(file.getId());
+//        }
+//        resp.getWriter().write(getGson().toJson(fileDumpList));
     }
     
     private void doGetFile(HttpServletRequest req, HttpServletResponse resp) throws IOException{

@@ -6,6 +6,8 @@
 package com.mycompany.serverglassfish.services;
 
 import com.google.gson.Gson;
+import com.mycompany.serverglassfish.DAO.GenericType;
+import javax.persistence.metamodel.SetAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 
 /**
@@ -14,7 +16,9 @@ import javax.persistence.metamodel.SingularAttribute;
  */
 public interface GenericManyToMany {
     
- String getNameField(String type);//переопределяемы метод. получение наименования поля, по которому связаны таблицы, для поиска
+   
+ String getJoinField(String type);//переопределяемы метод. получение наименования поля, по которому связаны таблицы, для поиска
  Gson getGson();//переопределяемый метод. исключение полей из Gson
- SingularAttribute getId();//переопределяемый метод. получение id по которуму происходит выборка
+ SingularAttribute getSearchField(String type);//переопределяемый метод. получение поля по которуму происходит выборка
+ GenericType getCriterion(String criterion);
 }

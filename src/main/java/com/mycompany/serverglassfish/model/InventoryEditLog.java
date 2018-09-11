@@ -73,10 +73,7 @@ public class InventoryEditLog {
     public void setEquipmentInventory(EquipmentInventory equipmentInventory) {
         this.equipmentInventory = equipmentInventory;
     }
-    
-    public String getEquipmentFieldName(){
-        return "equipmentInventory";
-    }
+
 
     public String getInventoryNumber() {
         return inventoryNumber;
