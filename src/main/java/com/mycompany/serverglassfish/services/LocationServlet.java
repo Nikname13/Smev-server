@@ -6,11 +6,13 @@
 package com.mycompany.serverglassfish.services;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.mycompany.serverglassfish.model.Department;
 import com.mycompany.serverglassfish.model.Department_;
 import com.mycompany.serverglassfish.model.Location;
 import com.mycompany.serverglassfish.model.Location_;
 import gson.GsonUtil;
+import java.util.ArrayList;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.servlet.annotation.WebServlet;
 
@@ -22,7 +24,7 @@ import javax.servlet.annotation.WebServlet;
 public class LocationServlet extends GenericManyToManyServlet<Location> {
     
     public LocationServlet() {
-        super(Location.class);
+        super(Location.class,new TypeToken<ArrayList<Location>>(){}.getType());
     }
 
     @Override

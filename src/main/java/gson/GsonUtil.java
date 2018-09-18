@@ -7,13 +7,14 @@ package gson;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-import com.mycompany.serverglassfish.model.Type;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
+
 
 /**
  *
@@ -49,15 +50,25 @@ public class GsonUtil<T> {
         return g.create();
     }
     
-    public T getEntityFromJson(HttpServletRequest req, Class<?> c) throws IOException{
+    private String getJsonToString(HttpServletRequest req) throws IOException{
         StringBuilder sb = new StringBuilder();
         BufferedReader reader = req.getReader(); 
             String line;
             while ((line = reader.readLine()) != null) {
                 sb.append(line).append('\n');
             }
-           return (T) new Gson().fromJson(sb.toString(), c);
+            System.out.println(sb.toString());
+            reader.close();
+            return sb.toString();
+    }
+    
+    public T getEntityFromJson(HttpServletRequest req, Class<?> c) throws IOException{
+           return (T) new Gson().fromJson(getJsonToString(req), c);
     } 
+    
+    public List<T> getListFromJson(HttpServletRequest req,Type listType) throws IOException{
+        return new Gson().fromJson(getJsonToString(req), listType);
+    }
     
     
 }

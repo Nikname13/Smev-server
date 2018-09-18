@@ -6,11 +6,13 @@
 package com.mycompany.serverglassfish.services;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.mycompany.serverglassfish.model.EquipmentParameter;
 import com.mycompany.serverglassfish.model.EquipmentParameter_;
 import com.mycompany.serverglassfish.model.Equipment_;
 import com.mycompany.serverglassfish.model.Parameter;
 import gson.GsonUtil;
+import java.util.ArrayList;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.servlet.annotation.WebServlet;
 
@@ -22,7 +24,7 @@ import javax.servlet.annotation.WebServlet;
 public class EquipmentParameterServlet extends GenericManyToManyServlet<EquipmentParameter> {
     
     public EquipmentParameterServlet(){
-        super(EquipmentParameter.class);
+        super(EquipmentParameter.class,new TypeToken<ArrayList<EquipmentParameter>>(){}.getType());
     }
 
     @Override

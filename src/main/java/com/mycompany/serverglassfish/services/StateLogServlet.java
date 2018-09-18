@@ -6,10 +6,12 @@
 package com.mycompany.serverglassfish.services;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.mycompany.serverglassfish.model.EquipmentInventory_;
 import com.mycompany.serverglassfish.model.StateLog;
 import com.mycompany.serverglassfish.model.StateLog_;
 import gson.GsonUtil;
+import java.util.ArrayList;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.servlet.annotation.WebServlet;
 
@@ -21,7 +23,7 @@ import javax.servlet.annotation.WebServlet;
 public class StateLogServlet extends GenericManyToManyServlet<StateLog> {
     
     public StateLogServlet() {
-        super(StateLog.class);
+        super(StateLog.class,new TypeToken<ArrayList<StateLog>>(){}.getType());
     }
 
     @Override

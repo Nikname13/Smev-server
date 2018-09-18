@@ -6,6 +6,7 @@
 package com.mycompany.serverglassfish.services;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.mycompany.serverglassfish.model.Department;
 import com.mycompany.serverglassfish.model.Equipment;
 import com.mycompany.serverglassfish.model.EquipmentInventory;
@@ -16,9 +17,10 @@ import com.mycompany.serverglassfish.model.InventoryNumber;
 import com.mycompany.serverglassfish.model.Parameter;
 import com.mycompany.serverglassfish.model.Post;
 import com.mycompany.serverglassfish.model.State;
-import com.mycompany.serverglassfish.model.Type;
+import com.mycompany.serverglassfish.model.TypeModel;
 import com.mycompany.serverglassfish.model.Worker;
 import gson.GsonUtil;
+import java.util.ArrayList;
 import javax.servlet.annotation.WebServlet;
 
 /**
@@ -29,7 +31,7 @@ import javax.servlet.annotation.WebServlet;
 public class EquipmentServlet extends GenericCRUDServlet<Equipment> {
 
     public EquipmentServlet() {
-        super(Equipment.class);
+        super(Equipment.class,new TypeToken<ArrayList<Equipment>>(){}.getType());
     }
 
     @Override
@@ -48,8 +50,8 @@ public class EquipmentServlet extends GenericCRUDServlet<Equipment> {
     @Override
     public Gson getGsonFromList() {
         return new GsonUtil()
-                .addExclusion(Type.class, "parameters")
-                .addExclusion(Type.class, "equipments")
+                .addExclusion(TypeModel.class, "parameters")
+                .addExclusion(TypeModel.class, "equipments")
                 .addExclusion(Equipment.class, "eq_inventory")
                 .addExclusion(Equipment.class, "eq_parameters")
                 .getGson();
@@ -58,7 +60,7 @@ public class EquipmentServlet extends GenericCRUDServlet<Equipment> {
     @Override
     public Gson getGson() {
         return new GsonUtil()
-                .addExclusion(Type.class, "equipments")
+                .addExclusion(TypeModel.class, "equipments")
                 .addExclusion(EquipmentParameter.class, "equipment")
                 .addExclusion(Parameter.class,"values")
                 .addExclusion(Parameter.class, "types")

@@ -52,7 +52,7 @@ Contributor(s):
     
     <mapping class="com.mycompany.serverglassfish.model.Parameter"/>
     <mapping class="com.mycompany.serverglassfish.model.ValueParameter"/>
-    <mapping class="com.mycompany.serverglassfish.model.Type"/>
+    <mapping class="com.mycompany.serverglassfish.model.TypeModel"/>
     <mapping class="com.mycompany.serverglassfish.model.State"/>
     <mapping class="com.mycompany.serverglassfish.model.Equipment"/>
     <mapping class="com.mycompany.serverglassfish.model.EquipmentParameter"/>

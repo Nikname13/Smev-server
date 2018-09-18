@@ -7,6 +7,7 @@ package com.mycompany.serverglassfish.services;
 
 import com.google.gson.Gson;
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -19,4 +20,5 @@ public interface GenericServlet<T> {
     Gson getGsonFromList();//переопределяемый метод. исключение полей из Gson для листа
     void setField (T entity);//переопределяемый метод. добавление ссылки на сущность
     T getTypeFromJson(HttpServletRequest req) throws IOException;//из json в сущность
+    List<T> getListFromJson(HttpServletRequest req) throws IOException;
 }

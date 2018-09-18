@@ -6,6 +6,7 @@
 package com.mycompany.serverglassfish.services;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.mycompany.serverglassfish.model.Area;
 import com.mycompany.serverglassfish.model.Department;
 import com.mycompany.serverglassfish.model.Equipment;
@@ -20,6 +21,9 @@ import com.mycompany.serverglassfish.model.State;
 import com.mycompany.serverglassfish.model.Worker;
 
 import gson.GsonUtil;
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.metamodel.SetAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.servlet.annotation.WebServlet;
@@ -32,7 +36,7 @@ import javax.servlet.annotation.WebServlet;
 public class EquipmentInventoryServlet extends GenericManyToManyServlet<EquipmentInventory> {
     
     public EquipmentInventoryServlet() {
-        super(EquipmentInventory.class);
+        super(EquipmentInventory.class,new TypeToken<ArrayList<EquipmentInventory>>(){}.getType());
     }
 
     @Override
@@ -48,7 +52,8 @@ public class EquipmentInventoryServlet extends GenericManyToManyServlet<Equipmen
             }
         }
     }
-
+    
+    
     @Override
     public SingularAttribute getSearchField(String type) {
         return EquipmentInventory_.id;

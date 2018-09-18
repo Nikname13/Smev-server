@@ -6,9 +6,11 @@
 package com.mycompany.serverglassfish.services;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.mycompany.serverglassfish.model.Department;
 import com.mycompany.serverglassfish.model.Purchase;
 import gson.GsonUtil;
+import java.util.ArrayList;
 import javax.servlet.annotation.WebServlet;
 
 /**
@@ -19,7 +21,7 @@ import javax.servlet.annotation.WebServlet;
 public class PurchaseServlet extends GenericCRUDServlet<Purchase> {
     
     public PurchaseServlet() {
-        super(Purchase.class);
+        super(Purchase.class,new TypeToken<ArrayList<Purchase>>(){}.getType());
     }
 
     @Override

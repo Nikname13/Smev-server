@@ -6,11 +6,13 @@
 package com.mycompany.serverglassfish.services;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.mycompany.serverglassfish.model.EquipmentInventory;
 import com.mycompany.serverglassfish.model.EquipmentInventory_;
 import com.mycompany.serverglassfish.model.InventoryEditLog;
 import com.mycompany.serverglassfish.model.InventoryEditLog_;
 import gson.GsonUtil;
+import java.util.ArrayList;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.servlet.annotation.WebServlet;
 
@@ -22,7 +24,7 @@ import javax.servlet.annotation.WebServlet;
 public class InventoryLogServlet extends GenericManyToManyServlet<InventoryEditLog> {
     
     public InventoryLogServlet() {
-        super(InventoryEditLog.class);
+        super(InventoryEditLog.class,new TypeToken<ArrayList<InventoryEditLog>>(){}.getType());
     }
 
     @Override

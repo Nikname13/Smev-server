@@ -6,8 +6,10 @@
 package com.mycompany.serverglassfish.services;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.mycompany.serverglassfish.model.Area;
 import gson.GsonUtil;
+import java.util.ArrayList;
 import javax.servlet.annotation.WebServlet;
 
 /**
@@ -18,7 +20,7 @@ import javax.servlet.annotation.WebServlet;
 public class AreaServlet extends GenericCRUDServlet<Area> {
     
     public AreaServlet() {
-        super(Area.class);
+        super(Area.class,new TypeToken<ArrayList<Area>>(){}.getType());
     }
 
     @Override

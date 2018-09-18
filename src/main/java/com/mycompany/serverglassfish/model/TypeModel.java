@@ -29,7 +29,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="type")
-public class Type implements Serializable {
+public class TypeModel implements Serializable {
     
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)

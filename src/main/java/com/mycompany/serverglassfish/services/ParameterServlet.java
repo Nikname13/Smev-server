@@ -7,9 +7,11 @@ package com.mycompany.serverglassfish.services;
 
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.mycompany.serverglassfish.model.Parameter;
 import com.mycompany.serverglassfish.model.ValueParameter;
 import gson.GsonUtil;
+import java.util.ArrayList;
 import javax.servlet.annotation.WebServlet;
 
 
@@ -21,7 +23,7 @@ import javax.servlet.annotation.WebServlet;
 public class ParameterServlet extends GenericCRUDServlet<Parameter> {
 
     public ParameterServlet() {
-        super(Parameter.class);
+        super(Parameter.class,new TypeToken<ArrayList<Parameter>>(){}.getType());
     }
 
     @Override

@@ -12,6 +12,7 @@ import com.mycompany.serverglassfish.DAO.GenericType;
 import gson.GsonUtil;
 import java.io.IOException;
 import static java.lang.Integer.parseInt;
+import java.lang.reflect.Type;
 import java.util.List;
 import javax.persistence.metamodel.SetAttribute;
 import javax.persistence.metamodel.SingularAttribute;
@@ -26,8 +27,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 public abstract class GenericManyToManyServlet<T> extends GenericCRUDServlet<T> implements GenericManyToMany {
 
-    public GenericManyToManyServlet(Class<T> persistentClass) {
-        super(persistentClass);
+    public GenericManyToManyServlet(Class<T> persistentClass,Type listType) {
+        super(persistentClass, listType);
     }
 
     @Override
@@ -58,5 +59,5 @@ public abstract class GenericManyToManyServlet<T> extends GenericCRUDServlet<T> 
     public abstract SingularAttribute getSearchField(String type);
 
     @Override
-    public abstract String getJoinField(String type);
+    public abstract String getJoinField(String type);  
 }

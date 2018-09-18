@@ -51,7 +51,7 @@ public class Equipment implements Serializable {
     @ManyToOne
     @JoinColumn(name="type_id", nullable=false)
     @SerializedName("mTypeModel")
-    private Type type;
+    private TypeModel type;
 
     @OneToMany(mappedBy="equipment", cascade=CascadeType.ALL)
     @SerializedName("mEntityList")
@@ -59,7 +59,7 @@ public class Equipment implements Serializable {
     
     @OneToMany(mappedBy="equipmentInv")
     private List<EquipmentInventory> eq_inventory=new ArrayList<>();
-
+    
     public int getId() {
         return id;
     }
@@ -92,11 +92,11 @@ public class Equipment implements Serializable {
         this.description = description;
     }
 
-    public Type getType() {
+    public TypeModel getType() {
         return type;
     }
 
-    public void setType(Type type) {
+    public void setType(TypeModel type) {
         this.type = type;
     }
 

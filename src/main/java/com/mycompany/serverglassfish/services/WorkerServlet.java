@@ -6,12 +6,14 @@
 package com.mycompany.serverglassfish.services;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.mycompany.serverglassfish.model.Department;
 import com.mycompany.serverglassfish.model.Department_;
 import com.mycompany.serverglassfish.model.Post;
 import com.mycompany.serverglassfish.model.Worker;
 import com.mycompany.serverglassfish.model.Worker_;
 import gson.GsonUtil;
+import java.util.ArrayList;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.servlet.annotation.WebServlet;
 
@@ -23,7 +25,7 @@ import javax.servlet.annotation.WebServlet;
 public class WorkerServlet extends GenericManyToManyServlet<Worker> {
     
     public WorkerServlet() {
-        super(Worker.class);
+        super(Worker.class,new TypeToken<ArrayList<Worker>>(){}.getType());
     }
 
     @Override
