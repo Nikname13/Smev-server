@@ -36,6 +36,10 @@ public class MovementEquipment {
     @SerializedName("mInventoryNumber")
     private String inventoryNumber;
     
+    @Column(name="equipment_type", nullable=false)
+    @SerializedName("mType")
+    private String equipmentType;
+    
     @Column(name="equipment_id", nullable=false)
     @SerializedName("mEquipmentId")
     private int equipmentId;
@@ -68,6 +72,16 @@ public class MovementEquipment {
     public void setInventoryNumber(String inventoryNumber) {
         this.inventoryNumber = inventoryNumber;
     }
+
+    public String getEquipmentType() {
+        return equipmentType;
+    }
+
+    public void setEquipmentType(String equipmentType) {
+        this.equipmentType = equipmentType;
+    }
+    
+    
 
     public int getEquipmentId() {
         return equipmentId;

@@ -18,6 +18,7 @@ import com.mycompany.serverglassfish.model.InventoryEditLog;
 import com.mycompany.serverglassfish.model.InventoryNumber;
 import com.mycompany.serverglassfish.model.Post;
 import com.mycompany.serverglassfish.model.State;
+import com.mycompany.serverglassfish.model.TypeModel;
 import com.mycompany.serverglassfish.model.Worker;
 
 import gson.GsonUtil;
@@ -80,7 +81,9 @@ public class EquipmentInventoryServlet extends GenericManyToManyServlet<Equipmen
         return new GsonUtil()
                 .addExclusion(Equipment.class,"eq_parameters")
                 .addExclusion(Equipment.class,"eq_inventory")
-                .addExclusion(Equipment.class, "type")
+                
+                .addExclusion(TypeModel.class, "parameters")
+                .addExclusion(TypeModel.class, "equipments")
                 
                 .addExclusion(InventoryNumber.class, "supply")
                 .addExclusion(InventoryNumber.class, "eq_inventoryList")
