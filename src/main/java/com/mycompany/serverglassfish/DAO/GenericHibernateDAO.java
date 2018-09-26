@@ -82,7 +82,8 @@ public class GenericHibernateDAO<T, ID extends Serializable> implements GenericD
 
     @Override
     public String update(T entity) {
-        try (Session ses = getSession()) {
+        try {
+            Session ses = getSession();
             ses.beginTransaction();
             ses.update(entity);
             ses.getTransaction().commit();

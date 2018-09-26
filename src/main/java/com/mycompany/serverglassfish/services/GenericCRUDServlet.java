@@ -95,10 +95,6 @@ public abstract class GenericCRUDServlet<T> extends HttpServlet implements Gener
          setField(entity);
          error.concat(dao.create(entity));
          }
-        if(req.getParameter("count")!=null){
-        }else{
-        //error=dao.create(p);
-        }
         dao.closeSession();
         if(error.isEmpty()){
         respEncoding(resp).getWriter().write(getJson(list));
@@ -123,12 +119,27 @@ public abstract class GenericCRUDServlet<T> extends HttpServlet implements Gener
         //super.doPut(req, resp); //To change body of generated methods, choose Tools | Templates.
         System.out.println("PUT");
         GenericHibernateDAO dao = new GenericHibernateDAO(getPersistentClass());
+         String error="";
+         List<T> list=new ArrayList();
+        if(req.getParameter("type")==null){
         final T p = getTypeFromJson(req);
         setField(p);
-        String error=dao.update(p);
+        error=dao.update(p);
+        }else{
+          list= getListFromJson(req);
+         for(T entity:list){
+             setField(entity);
+             error.concat(dao.update(entity));
+         }
+        }
+        dao.closeSession();
         System.out.print("out parameter= ");
         //print(p);
-        respEncoding(resp).getWriter().write(getJson(p));
+        if(error.isEmpty()){
+        respEncoding(resp).getWriter().write(getJson(list));
+        }else{
+            respEncoding(resp).getWriter().write(error);
+        }
     }
         
      @Override
