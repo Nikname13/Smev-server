@@ -24,27 +24,28 @@ import javax.servlet.http.HttpServletResponse;
  * @author a.zolotarev
  */
 public abstract class GenericCRUDServlet<T> extends HttpServlet implements GenericServlet<T> {
-    
+
     private Class<T> persistentClass;
     private Type listType;
 
     public GenericCRUDServlet(Class<T> persistentClass, Type listType) {
         this.persistentClass = persistentClass;
-        this.listType=listType;
+        this.listType = listType;
     }
-    
-    public Class<T> getPersistentClass(){
+
+    public Class<T> getPersistentClass() {
         return persistentClass;
     }
-    
-    private String getJson(T p){
-        String json=getGson().toJson(p);
-        System.out.print("out = "+json);
+
+    private String getJson(T p) {
+        String json = getGson().toJson(p);
+        System.out.print("out = " + json);
         return json;
     }
-    private String getJson(List<T> p){
-        String json=getGson().toJson(p);
-        System.out.print("out = "+json);
+
+    private String getJson(List<T> p) {
+        String json = getGson().toJson(p);
+        System.out.print("out = " + json);
         return json;
     }
 
@@ -54,18 +55,16 @@ public abstract class GenericCRUDServlet<T> extends HttpServlet implements Gener
     }
 
     @Override
-    public  List<T> getListFromJson(HttpServletRequest req) throws IOException{
+    public List<T> getListFromJson(HttpServletRequest req) throws IOException {
         return new GsonUtil<T>().getListFromJson(req, listType);
     }
-    
-    
-    
-    protected HttpServletResponse respEncoding(HttpServletResponse resp){
+
+    protected HttpServletResponse respEncoding(HttpServletResponse resp) {
         resp.setCharacterEncoding("UTF-8");
-    resp.setContentType("text/xml");
-    return resp;
+        resp.setContentType("text/xml");
+        return resp;
     }
-   
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse resp)
             throws ServletException, IOException {
@@ -77,28 +76,28 @@ public abstract class GenericCRUDServlet<T> extends HttpServlet implements Gener
             setField(p);
             respEncoding(resp).getWriter().write(getJson(p));
         } else {
-            System.out.println("id=null "+getGsonFromList().toJson(dao.getAll()));
-            respEncoding(resp).getWriter().write( getGsonFromList().toJson(dao.getAll()));
+            System.out.println("id=null " + getGsonFromList().toJson(dao.getAll()));
+            respEncoding(resp).getWriter().write(getGsonFromList().toJson(dao.getAll()));
         }
         dao.closeSession();
     }
-    
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         System.out.println("POST");
-        System.out.println("in json = "+req);
-        String error="";
+        System.out.println("in json = " + req);
+        String error = "";
         GenericHibernateDAO dao = new GenericHibernateDAO(getPersistentClass());
-         List<T> list=getListFromJson(req);
-         for(T entity:list){
-         setField(entity);
-         error.concat(dao.create(entity));
-         }
+        List<T> list = getListFromJson(req);
+        for (T entity : list) {
+            setField(entity);
+            error.concat(dao.create(entity));
+        }
         dao.closeSession();
-        if(error.isEmpty()){
-        respEncoding(resp).getWriter().write(getJson(list));
-        }else{
+        if (error.isEmpty()) {
+            respEncoding(resp).getWriter().write(getJson(list));
+        } else {
             respEncoding(resp).getWriter().write(error);
         }
     }
@@ -107,42 +106,36 @@ public abstract class GenericCRUDServlet<T> extends HttpServlet implements Gener
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         System.out.println("DELETE");
-        String response=new GenericHibernateDAO(getPersistentClass()).delete(Parser.getId(req));
+        String response = new GenericHibernateDAO(getPersistentClass()).delete(Parser.getId(req));
         if (!response.isEmpty()) {
             respEncoding(resp).getWriter().write(response);
         }
     }
-    
+
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         //super.doPut(req, resp); //To change body of generated methods, choose Tools | Templates.
         System.out.println("PUT");
         GenericHibernateDAO dao = new GenericHibernateDAO(getPersistentClass());
-         String error="";
-         List<T> list=new ArrayList();
-        if(req.getParameter("type")==null){
-        final T p = getTypeFromJson(req);
-        setField(p);
-        error=dao.update(p);
-        }else{
-          list= getListFromJson(req);
-         for(T entity:list){
-             setField(entity);
-             error.concat(dao.update(entity));
-         }
-        }
+        String error = "";
+        List<T> list = new ArrayList();
+            list = getListFromJson(req);
+            for (T entity : list) {
+                setField(entity);
+                error.concat(dao.update(entity));
+            }
         dao.closeSession();
         System.out.print("out parameter= ");
         //print(p);
-        if(error.isEmpty()){
-        respEncoding(resp).getWriter().write(getJson(list));
-        }else{
+        if (error.isEmpty()) {
+                respEncoding(resp).getWriter().write(getJson(list));
+        } else {
             respEncoding(resp).getWriter().write(error);
         }
     }
-        
-     @Override
+
+    @Override
     public abstract Gson getGson();
 
     @Override

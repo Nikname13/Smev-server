@@ -7,6 +7,7 @@ package com.mycompany.serverglassfish.services;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.mycompany.serverglassfish.model.InventoryNumber;
 import com.mycompany.serverglassfish.model.Provider;
 import com.mycompany.serverglassfish.model.Supply;
 import gson.GsonUtil;
@@ -23,6 +24,17 @@ public class SupplyServlet extends GenericCRUDServlet<Supply> {
     public SupplyServlet() {
         super(Supply.class,new TypeToken<ArrayList<Supply>>(){}.getType());
     }
+
+    @Override
+    public void setField(Supply entity) {
+        if(entity.getInventoryList()!=null){
+            for(InventoryNumber number:entity.getInventoryList()){
+                number.setSupply(entity);
+            }
+        }
+    }
+    
+    
 
     @Override
     public Gson getGsonFromList() {

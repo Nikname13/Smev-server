@@ -10,6 +10,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -44,23 +45,20 @@ public class Supply implements Serializable {
     private String type;
     
     @Column(name="date", nullable=false)
-    @SerializedName("mDateSupply")
+    @SerializedName("mDate")
     private LocalDate date;
         
     @Column(name="description")
     @SerializedName("mDescription")
     private String description;
     
-    @Column(name="documentation")
-    @SerializedName("mDocumentation")
-    private String documentation;
-    
     @ManyToOne
     @JoinColumn(name="provider_id", nullable=false)
     @SerializedName("mProviderModel")
     private Provider provider;
     
-    @OneToMany(mappedBy="supply")
+    @OneToMany(mappedBy="supply", cascade=CascadeType.ALL)
+    @SerializedName("mEntityList")
     private List<InventoryNumber> inventoryList =new ArrayList();
 
     public int getId() {
@@ -101,14 +99,6 @@ public class Supply implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getDocumentation() {
-        return documentation;
-    }
-
-    public void setDocumentation(String documentation) {
-        this.documentation = documentation;
     }
 
     public Provider getProvider() {
