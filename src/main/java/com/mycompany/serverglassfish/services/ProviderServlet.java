@@ -8,6 +8,7 @@ package com.mycompany.serverglassfish.services;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.mycompany.serverglassfish.model.Provider;
+import com.mycompany.serverglassfish.model.Provider_;
 import gson.GsonUtil;
 import java.util.ArrayList;
 import javax.servlet.annotation.WebServlet;
@@ -31,7 +32,7 @@ public class ProviderServlet extends GenericCRUDServlet<Provider> {
     @Override
     public Gson getGson() {
         return new GsonUtil()
-                .addExclusion(Provider.class, "supplys")
+                .addExclusion(Provider.class, Provider_.SUPPLYS)
                 .getGson();
     }
 }

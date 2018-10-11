@@ -41,10 +41,10 @@ public class LocationServlet extends GenericManyToManyServlet<Location> {
     @Override
     public Gson getGson() {
         return new GsonUtil()
-                .addExclusion(Department.class, "area")
-                .addExclusion(Department.class,"purchaseListDepartment")
-                .addExclusion(Department.class, "workersListDepartmnet")
-                .addExclusion(Department.class, "equipmentList")
+                .addExclusion(Department.class, Department_.AREA)
+                .addExclusion(Department.class, Department_.PURCHASE_LIST_DEPARTMENT)
+                .addExclusion(Department.class, Department_.WORKERS_LIST_DEPARTMNET)
+                .addExclusion(Department.class, Department_.EQUIPMENT_LIST)
                 .getGson();
     }
 

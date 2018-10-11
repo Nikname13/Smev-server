@@ -10,6 +10,7 @@ import com.google.gson.reflect.TypeToken;
 import com.mycompany.serverglassfish.model.Department;
 import com.mycompany.serverglassfish.model.Department_;
 import com.mycompany.serverglassfish.model.Post;
+import com.mycompany.serverglassfish.model.Post_;
 import com.mycompany.serverglassfish.model.Worker;
 import com.mycompany.serverglassfish.model.Worker_;
 import gson.GsonUtil;
@@ -45,12 +46,11 @@ public class WorkerServlet extends GenericManyToManyServlet<Worker> {
     @Override
     public Gson getGson() {
         return new GsonUtil()
-                .addExclusion(Department.class, "area")
-                .addExclusion(Department.class, "purchaseListDepartment")
-                .addExclusion(Department.class, "locationsListDepartment")
-                .addExclusion(Department.class, "workersListDepartmnet")
-                .addExclusion(Department.class, "equipmentList")
-                .addExclusion(Post.class, "workerList")
+                .addExclusion(Department.class, Department_.AREA)
+                .addExclusion(Department.class, Department_.PURCHASE_LIST_DEPARTMENT)
+                .addExclusion(Department.class, Department_.WORKERS_LIST_DEPARTMNET)
+                .addExclusion(Department.class, Department_.EQUIPMENT_LIST)
+                .addExclusion(Post.class, Post_.WORKER_LIST)
                 .getGson();
     }
 

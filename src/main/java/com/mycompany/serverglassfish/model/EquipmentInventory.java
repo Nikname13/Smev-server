@@ -70,7 +70,7 @@ public class EquipmentInventory implements Serializable{
     @OneToMany(mappedBy="equipmentInventory")
     @Cascade({CascadeType.ALL})
     @SerializedName("mInventoryEditLog")
-    private List<InventoryEditLog> inventoryEditLogs=new ArrayList<>();
+    private List<InventoryNumberEquipmentLog> inventoryEditLogs=new ArrayList<>();
     
     @ManyToOne
     @JoinColumn(name="state_id",nullable=false)
@@ -146,15 +146,15 @@ public class EquipmentInventory implements Serializable{
         this.departmentEquipment = departmentEquipment;
     }
 
-    public List<InventoryEditLog> getInventoryEditLogs() {
+    public List<InventoryNumberEquipmentLog> getInventoryEditLogs() {
         return inventoryEditLogs;
     }
 
-    public void setInventoryEditLogs(List<InventoryEditLog> inventoryEditLogs) {
+    public void setInventoryEditLogs(List<InventoryNumberEquipmentLog> inventoryEditLogs) {
         this.inventoryEditLogs = inventoryEditLogs;
     }
     
-    public void addInvEditLog(InventoryEditLog editLog){
+    public void addInvEditLog(InventoryNumberEquipmentLog editLog){
         inventoryEditLogs.add(editLog);
         editLog.setEquipmentInventory(this);
     }

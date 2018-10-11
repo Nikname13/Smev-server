@@ -11,13 +11,17 @@ import com.mycompany.serverglassfish.model.Department;
 import com.mycompany.serverglassfish.model.Equipment;
 import com.mycompany.serverglassfish.model.EquipmentInventory;
 import com.mycompany.serverglassfish.model.EquipmentParameter;
+import com.mycompany.serverglassfish.model.EquipmentParameter_;
+import com.mycompany.serverglassfish.model.Equipment_;
 import com.mycompany.serverglassfish.model.StateLog;
 import com.mycompany.serverglassfish.model.FileDump;
 import com.mycompany.serverglassfish.model.InventoryNumber;
 import com.mycompany.serverglassfish.model.Parameter;
+import com.mycompany.serverglassfish.model.Parameter_;
 import com.mycompany.serverglassfish.model.Post;
 import com.mycompany.serverglassfish.model.State;
 import com.mycompany.serverglassfish.model.TypeModel;
+import com.mycompany.serverglassfish.model.TypeModel_;
 import com.mycompany.serverglassfish.model.Worker;
 import gson.GsonUtil;
 import java.util.ArrayList;
@@ -50,22 +54,21 @@ public class EquipmentServlet extends GenericCRUDServlet<Equipment> {
     @Override
     public Gson getGsonFromList() {
         return new GsonUtil()
-                .addExclusion(TypeModel.class, "parameters")
-                .addExclusion(TypeModel.class, "equipments")
-                .addExclusion(Equipment.class, "eq_inventory")
-                .addExclusion(Equipment.class, "eq_parameters")
+                .addExclusion(TypeModel.class, TypeModel_.PARAMETERS)
+                .addExclusion(TypeModel.class, TypeModel_.EQUIPMENTS)
+                .addExclusion(Equipment.class, Equipment_.EQ_INVENTORY)
+                .addExclusion(Equipment.class, Equipment_.EQ_PARAMETERS)
                 .getGson();
     }
 
     @Override
     public Gson getGson() {
         return new GsonUtil()
-                .addExclusion(TypeModel.class, "equipments")
-                .addExclusion(EquipmentParameter.class, "equipment")
-                .addExclusion(Parameter.class,"values")
-                .addExclusion(Parameter.class, "types")
-                .addExclusion(Parameter.class, "eq_parameter")
-                .addExclusion(Equipment.class,"eq_inventory")
-                .getGson();
+                .addExclusion(TypeModel.class, TypeModel_.EQUIPMENTS)
+                .addExclusion(EquipmentParameter.class, EquipmentParameter_.EQUIPMENT)
+                .addExclusion(Parameter.class, Parameter_.VALUES)
+                .addExclusion(Parameter.class, Parameter_.EQ_PARAMETER)
+                .addExclusion(Equipment.class, Equipment_.EQ_INVENTORY)
+                .getGson(); 
     }    
 }

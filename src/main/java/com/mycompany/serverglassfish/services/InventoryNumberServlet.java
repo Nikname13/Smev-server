@@ -11,6 +11,7 @@ import com.mycompany.serverglassfish.model.InventoryNumber;
 import com.mycompany.serverglassfish.model.InventoryNumber_;
 import com.mycompany.serverglassfish.model.Provider;
 import com.mycompany.serverglassfish.model.Supply;
+import com.mycompany.serverglassfish.model.Supply_;
 import gson.GsonUtil;
 import java.util.ArrayList;
 import javax.persistence.metamodel.SingularAttribute;
@@ -35,9 +36,9 @@ public class InventoryNumberServlet extends GenericManyToManyServlet<InventoryNu
     @Override
     public Gson getGson() {
         return new GsonUtil()
-                .addExclusion(Supply.class, "provider")
-                .addExclusion(Supply.class, "inventoryList")
-                .addExclusion(InventoryNumber.class, "eq_inventoryList")
+                .addExclusion(Supply.class, Supply_.PROVIDER)
+                .addExclusion(Supply.class, Supply_.INVENTORY_LIST)
+                .addExclusion(InventoryNumber.class, InventoryNumber_.EQ_INVENTORY_LIST)
                 .getGson();
     }   
 

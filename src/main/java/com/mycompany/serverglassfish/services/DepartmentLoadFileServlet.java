@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import com.mycompany.serverglassfish.model.Department;
 import com.mycompany.serverglassfish.model.Department_;
 import com.mycompany.serverglassfish.model.FileDump;
+import com.mycompany.serverglassfish.model.FileDump_;
 import gson.GsonUtil;
 import javax.servlet.annotation.WebServlet;
 
@@ -59,9 +60,9 @@ public class DepartmentLoadFileServlet extends GenericFileServlet<FileDump>{
     @Override
     public Gson getGson() {
         return new GsonUtil()
-                .addExclusion(FileDump.class, "department_doc_files")
-                .addExclusion(FileDump.class, "department_config_files")
-                .addExclusion(FileDump.class, "department_photo_files")
+                .addExclusion(FileDump.class, FileDump_.DEPARTMENT_DOC_FILES)
+                .addExclusion(FileDump.class, FileDump_.DEPARTMENT_CONFIG_FILES)
+                .addExclusion(FileDump.class, FileDump_.DEPARTMENT_PHOTO_FILES)
                 .getGson();
     }
     

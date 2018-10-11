@@ -8,6 +8,7 @@ package com.mycompany.serverglassfish.services;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.mycompany.serverglassfish.model.Area;
+import com.mycompany.serverglassfish.model.Area_;
 import gson.GsonUtil;
 import java.util.ArrayList;
 import javax.servlet.annotation.WebServlet;
@@ -31,7 +32,7 @@ public class AreaServlet extends GenericCRUDServlet<Area> {
     @Override
     public Gson getGson() {
         return new GsonUtil()
-                .addExclusion(Area.class,"departmentsListArea")
+                .addExclusion(Area.class,Area_.DEPARTMENTS_LIST_AREA)
                 .getGson();
     }
     

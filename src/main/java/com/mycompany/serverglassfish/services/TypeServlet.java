@@ -8,7 +8,9 @@ package com.mycompany.serverglassfish.services;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.mycompany.serverglassfish.model.Parameter;
+import com.mycompany.serverglassfish.model.Parameter_;
 import com.mycompany.serverglassfish.model.TypeModel;
+import com.mycompany.serverglassfish.model.TypeModel_;
 import gson.GsonUtil;
 import java.util.ArrayList;
 
@@ -29,17 +31,17 @@ public class TypeServlet extends GenericCRUDServlet<TypeModel>{
     @Override
     public Gson getGsonFromList() {
         return new GsonUtil()
-                    .addExclusion(TypeModel.class, "parameters")
-                    .addExclusion(TypeModel.class, "equipments")
+                    .addExclusion(TypeModel.class, TypeModel_.PARAMETERS)
+                    .addExclusion(TypeModel.class, TypeModel_.EQUIPMENTS)
                     .getGson();
     }
 
     @Override
     public Gson getGson() {
         return new GsonUtil()
-                .addExclusion(TypeModel.class, "equipments")
-                .addExclusion(Parameter.class, "values")
-                .addExclusion(Parameter.class, "eq_parameter")
+                .addExclusion(TypeModel.class, TypeModel_.EQUIPMENTS)
+                .addExclusion(Parameter.class, Parameter_.VALUES)
+                .addExclusion(Parameter.class, Parameter_.EQ_PARAMETER)
                 .getGson();
     }
 }

@@ -9,6 +9,7 @@ package com.mycompany.serverglassfish.services;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.mycompany.serverglassfish.model.State;
+import com.mycompany.serverglassfish.model.State_;
 import gson.GsonUtil;
 import java.util.ArrayList;
 import javax.servlet.annotation.WebServlet;
@@ -33,7 +34,7 @@ public class StateServlet extends GenericCRUDServlet<State> {
     @Override
     public Gson getGson() {
         return new GsonUtil()
-                .addExclusion(State.class, "equipmentInventoryList")
+                .addExclusion(State.class, State_.EQUIPMENT_INVENTORY_LIST)
                 .getGson();
     }
     

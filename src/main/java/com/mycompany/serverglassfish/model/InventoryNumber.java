@@ -10,7 +10,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,6 +20,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 /**
  *
@@ -55,6 +56,11 @@ public class InventoryNumber implements Serializable {
     
     @OneToMany(mappedBy="inv_number")
     private List<EquipmentInventory> eq_inventoryList=new ArrayList<>();
+    
+    @OneToMany(mappedBy="inventoryNumber")
+    @Cascade({CascadeType.ALL})
+    @SerializedName("mInventoryNumberLogList")
+    private List<InventoryNumberLog> inventoryNumberLogList;
 
     public int getId() {
         return id;
@@ -103,5 +109,13 @@ public class InventoryNumber implements Serializable {
     public void setEq_inventory(List<EquipmentInventory> eq_inventory) {
         this.eq_inventoryList = eq_inventory;
     }
-    
+
+    public List<InventoryNumberLog> getInventoryNumberLogList() {
+        return inventoryNumberLogList;
+    }
+
+    public void setInventoryNumberLogList(List<InventoryNumberLog> inventoryNumberLogList) {
+        this.inventoryNumberLogList = inventoryNumberLogList;
+    }
+  
 }

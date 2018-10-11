@@ -11,6 +11,7 @@ import com.mycompany.serverglassfish.model.EquipmentParameter;
 import com.mycompany.serverglassfish.model.EquipmentParameter_;
 import com.mycompany.serverglassfish.model.Equipment_;
 import com.mycompany.serverglassfish.model.Parameter;
+import com.mycompany.serverglassfish.model.Parameter_;
 import gson.GsonUtil;
 import java.util.ArrayList;
 import javax.persistence.metamodel.SingularAttribute;
@@ -40,9 +41,9 @@ public class EquipmentParameterServlet extends GenericManyToManyServlet<Equipmen
     @Override
     public Gson getGson() {
         return new GsonUtil()
-                .addExclusion(EquipmentParameter.class, "equipment")
-                .addExclusion(Parameter.class, "values")
-                .addExclusion(Parameter.class, "eq_parameter")
+                .addExclusion(EquipmentParameter.class, EquipmentParameter_.EQUIPMENT)
+                .addExclusion(Parameter.class, Parameter_.VALUES)
+                .addExclusion(Parameter.class, Parameter_.EQ_PARAMETER)
                 .getGson();
                 
     }

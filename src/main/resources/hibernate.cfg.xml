@@ -68,11 +68,12 @@ Contributor(s):
     <mapping class="com.mycompany.serverglassfish.model.Department"/>
     <mapping class="com.mycompany.serverglassfish.model.MovementLog"/>
     <mapping class="com.mycompany.serverglassfish.model.FileDump"/>
-    <mapping class="com.mycompany.serverglassfish.model.InventoryEditLog"/>
+    <mapping class="com.mycompany.serverglassfish.model.InventoryNumberEquipmentLog"/>
     <mapping class="com.mycompany.serverglassfish.model.Post"/>
     <mapping class="com.mycompany.serverglassfish.model.MovementDepartment"/>
     <mapping class="com.mycompany.serverglassfish.model.MovementEquipment"/>
     <mapping class="com.mycompany.serverglassfish.model.MovementWorker"/>
+    <mapping class="com.mycompany.serverglassfish.model.InventoryNumberLog"/>
     
   </session-factory>
 </hibernate-configuration>

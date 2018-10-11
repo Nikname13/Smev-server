@@ -9,7 +9,9 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.mycompany.serverglassfish.model.InventoryNumber;
 import com.mycompany.serverglassfish.model.Provider;
+import com.mycompany.serverglassfish.model.Provider_;
 import com.mycompany.serverglassfish.model.Supply;
+import com.mycompany.serverglassfish.model.Supply_;
 import gson.GsonUtil;
 import java.util.ArrayList;
 import javax.servlet.annotation.WebServlet;
@@ -44,8 +46,8 @@ public class SupplyServlet extends GenericCRUDServlet<Supply> {
     @Override
     public Gson getGson() {
         return new GsonUtil()
-                .addExclusion(Provider.class, "supplys")
-                .addExclusion(Supply.class, "inventoryList")
+                .addExclusion(Provider.class, Provider_.SUPPLYS)
+                .addExclusion(Supply.class, Supply_.INVENTORY_LIST)
                 .getGson();
     }
     

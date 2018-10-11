@@ -21,9 +21,8 @@ import javax.persistence.Table;
  * @author a.zolotarev
  */
 @Entity
-@Table(name="inventory_edit_log")
-public class InventoryEditLog {
-    
+@Table(name="inventory_number_log")
+public class InventoryNumberLog {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id")
@@ -32,11 +31,11 @@ public class InventoryEditLog {
     
     @Column(name="inventory_number", nullable=false)
     @SerializedName("mName")
-    private String inventoryNumber;
+    private String number;
     
-    @Column(name="inventory_number_id", nullable=false)
-    @SerializedName("mInventoryId")
-    private int inventoryId;
+    @Column(name="supply_number")
+    @SerializedName("mSupplyNumber")
+    private String supplyNumber;
     
     @Column(name="date", nullable=false)
     @SerializedName("mDate")
@@ -45,10 +44,10 @@ public class InventoryEditLog {
     @Column(name="description", nullable=false)
     @SerializedName("mDescription")
     private String descriptionInventoryLog;
-      
+    
     @ManyToOne
-    @JoinColumn(name="equipment_inventory_id")
-    private EquipmentInventory equipmentInventory;
+    @JoinColumn(name="inventory_number_id")
+    private InventoryNumber inventoryNumber;
 
     public int getId() {
         return id;
@@ -58,37 +57,20 @@ public class InventoryEditLog {
         this.id = id;
     }
 
-    public String getDescriptionState() {
-        return descriptionInventoryLog;
+    public String getNumber() {
+        return number;
     }
 
-    public void setDescriptionState(String descriptionState) {
-        this.descriptionInventoryLog = descriptionState;
+    public void setNumber(String number) {
+        this.number = number;
     }
 
-    public EquipmentInventory getEquipmentInventory() {
-        return equipmentInventory;
+    public String getSupplyNumber() {
+        return supplyNumber;
     }
 
-    public void setEquipmentInventory(EquipmentInventory equipmentInventory) {
-        this.equipmentInventory = equipmentInventory;
-    }
-
-
-    public String getInventoryNumber() {
-        return inventoryNumber;
-    }
-
-    public void setInventoryNumber(String inventoryNumber) {
-        this.inventoryNumber = inventoryNumber;
-    }
-
-    public int getInventoryId() {
-        return inventoryId;
-    }
-
-    public void setInventoryId(int inventoryId) {
-        this.inventoryId = inventoryId;
+    public void setSupplyNumber(String supplyNumber) {
+        this.supplyNumber = supplyNumber;
     }
 
     public LocalDate getDateInventoryLog() {
@@ -98,6 +80,23 @@ public class InventoryEditLog {
     public void setDateInventoryLog(LocalDate dateInventoryLog) {
         this.dateInventoryLog = dateInventoryLog;
     }
+
+    public String getDescriptionInventoryLog() {
+        return descriptionInventoryLog;
+    }
+
+    public void setDescriptionInventoryLog(String descriptionInventoryLog) {
+        this.descriptionInventoryLog = descriptionInventoryLog;
+    }
+
+    public InventoryNumber getInventoryNumber() {
+        return inventoryNumber;
+    }
+
+    public void setInventoryNumber(InventoryNumber inventoryNumber) {
+        this.inventoryNumber = inventoryNumber;
+    }
     
     
+
 }

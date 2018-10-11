@@ -57,18 +57,18 @@ public class MovementServlet extends GenericManyToManyServlet<MovementLog>{
     @Override
     public Gson getGsonFromList() {
         return new GsonUtil()
-                .addExclusion(MovementLog.class, "departmentsList")
-                .addExclusion(MovementLog.class, "equipmentsList")
-                .addExclusion(MovementLog.class, "workersList")
+                .addExclusion(MovementLog.class, MovementLog_.DEPARTMENTS_LIST)
+                .addExclusion(MovementLog.class, MovementLog_.EQUIPMENTS_LIST)
+                .addExclusion(MovementLog.class, MovementLog_.WORKERS_LIST)
                 .getGson();
     }
 
     @Override
     public Gson getGson() {
         return new GsonUtil()
-                .addExclusion(MovementDepartment.class,"departmentMovement")
-                .addExclusion(MovementEquipment.class,"equipmentMovement")
-                .addExclusion(MovementWorker.class,"workerMovement")
+                .addExclusion(MovementDepartment.class, MovementDepartment_.DEPARTMENT_MOVEMENT)
+                .addExclusion(MovementEquipment.class, MovementEquipment_.EQUIPMENT_MOVEMENT)
+                .addExclusion(MovementWorker.class, MovementWorker_.WORKER_MOVEMENT)
                 .getGson();
     }
 

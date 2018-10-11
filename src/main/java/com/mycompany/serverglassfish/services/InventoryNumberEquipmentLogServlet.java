@@ -9,8 +9,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.mycompany.serverglassfish.model.EquipmentInventory;
 import com.mycompany.serverglassfish.model.EquipmentInventory_;
-import com.mycompany.serverglassfish.model.InventoryEditLog;
-import com.mycompany.serverglassfish.model.InventoryEditLog_;
+import com.mycompany.serverglassfish.model.InventoryNumberEquipmentLog;
+import com.mycompany.serverglassfish.model.InventoryNumberEquipmentLog_;
 import gson.GsonUtil;
 import java.util.ArrayList;
 import javax.persistence.metamodel.SingularAttribute;
@@ -20,11 +20,11 @@ import javax.servlet.annotation.WebServlet;
  *
  * @author a.zolotarev
  */
-@WebServlet(name = "InventoryLogServlet", urlPatterns = {"/inventory_log_servlet"})
-public class InventoryLogServlet extends GenericManyToManyServlet<InventoryEditLog> {
+@WebServlet(name = "InventoryNumberEquipmentLogServlet", urlPatterns = {"/inventory_equipment_log_servlet"})
+public class InventoryNumberEquipmentLogServlet extends GenericManyToManyServlet<InventoryNumberEquipmentLog> {
     
-    public InventoryLogServlet() {
-        super(InventoryEditLog.class,new TypeToken<ArrayList<InventoryEditLog>>(){}.getType());
+    public InventoryNumberEquipmentLogServlet() {
+        super(InventoryNumberEquipmentLog.class,new TypeToken<ArrayList<InventoryNumberEquipmentLog>>(){}.getType());
     }
 
     @Override
@@ -35,7 +35,7 @@ public class InventoryLogServlet extends GenericManyToManyServlet<InventoryEditL
     @Override
     public Gson getGson() {
         return new GsonUtil()
-                .addExclusion(InventoryEditLog.class, "equipmentInventory")
+                .addExclusion(InventoryNumberEquipmentLog.class, InventoryNumberEquipmentLog_.EQUIPMENT_INVENTORY)
                 .getGson();
     }
     
@@ -48,7 +48,7 @@ public class InventoryLogServlet extends GenericManyToManyServlet<InventoryEditL
 
     @Override
     public String getJoinField(String type) {
-        return InventoryEditLog_.EQUIPMENT_INVENTORY;
+        return InventoryNumberEquipmentLog_.EQUIPMENT_INVENTORY;
     }
     
     

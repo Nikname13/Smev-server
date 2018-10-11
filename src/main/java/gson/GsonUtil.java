@@ -31,7 +31,7 @@ public class GsonUtil<T> {
     } 
     
     public GsonUtil addExclusion(Class c, String name){
-        //System.out.println("in class= "+c+"in fieldName= "+name);
+        System.out.println("in class= "+c+" in fieldName= "+name);
         //System.out.println("in map size= "+map.size());
         map.put(name,c);
         //System.out.println("out map size= "+map.size());
