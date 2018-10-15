@@ -59,7 +59,7 @@ public class InventoryNumber implements Serializable {
     
     @OneToMany(mappedBy="inventoryNumber")
     @Cascade({CascadeType.ALL})
-    @SerializedName("mInventoryNumberLogList")
+    @SerializedName("mEntityList")
     private List<InventoryNumberLog> inventoryNumberLogList;
 
     public int getId() {
@@ -117,5 +117,12 @@ public class InventoryNumber implements Serializable {
     public void setInventoryNumberLogList(List<InventoryNumberLog> inventoryNumberLogList) {
         this.inventoryNumberLogList = inventoryNumberLogList;
     }
-  
+ 
+    public void setField(){
+        if(inventoryNumberLogList!=null){
+            for(InventoryNumberLog numberLog:inventoryNumberLogList){
+                numberLog.setInventoryNumber(this);
+            }
+        }
+    }
 }

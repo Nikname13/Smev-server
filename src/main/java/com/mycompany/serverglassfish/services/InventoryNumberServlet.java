@@ -29,6 +29,14 @@ public class InventoryNumberServlet extends GenericManyToManyServlet<InventoryNu
     }
 
     @Override
+    public void setField(InventoryNumber entity) {
+        entity.setField();
+    }
+    
+    
+    
+
+    @Override
     public Gson getGsonFromList() {
         return getGson();         
     }
@@ -39,6 +47,7 @@ public class InventoryNumberServlet extends GenericManyToManyServlet<InventoryNu
                 .addExclusion(Supply.class, Supply_.PROVIDER)
                 .addExclusion(Supply.class, Supply_.INVENTORY_LIST)
                 .addExclusion(InventoryNumber.class, InventoryNumber_.EQ_INVENTORY_LIST)
+                .addExclusion(InventoryNumber.class, InventoryNumber_.INVENTORY_NUMBER_LOG_LIST)
                 .getGson();
     }   
 

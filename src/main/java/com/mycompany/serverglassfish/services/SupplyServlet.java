@@ -8,6 +8,7 @@ package com.mycompany.serverglassfish.services;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.mycompany.serverglassfish.model.InventoryNumber;
+import com.mycompany.serverglassfish.model.InventoryNumberLog;
 import com.mycompany.serverglassfish.model.Provider;
 import com.mycompany.serverglassfish.model.Provider_;
 import com.mycompany.serverglassfish.model.Supply;
@@ -32,6 +33,7 @@ public class SupplyServlet extends GenericCRUDServlet<Supply> {
         if(entity.getInventoryList()!=null){
             for(InventoryNumber number:entity.getInventoryList()){
                 number.setSupply(entity);
+                number.setField();
             }
         }
     }
