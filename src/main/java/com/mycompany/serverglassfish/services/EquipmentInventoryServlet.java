@@ -71,6 +71,7 @@ public class EquipmentInventoryServlet extends GenericManyToManyServlet<Equipmen
         switch(type){
             case "equipment": return EquipmentInventory_.EQUIPMENT_INV;
             case "department": return EquipmentInventory_.DEPARTMENT_EQUIPMENT;
+            case "inventoryNumber": return EquipmentInventory_.INV_NUMBER;
         }
         return null;
     }
@@ -93,7 +94,7 @@ public class EquipmentInventoryServlet extends GenericManyToManyServlet<Equipmen
                 
                 .addExclusion(InventoryNumber.class, InventoryNumber_.SUPPLY)
                 .addExclusion(InventoryNumber.class, InventoryNumber_.EQ_INVENTORY_LIST)
-                //.addExclusion(InvenotryNumber.class, InventoryNumber_)
+                .addExclusion(InventoryNumber.class, InventoryNumber_.INVENTORY_NUMBER_LOG_LIST)
                 
                 .addExclusion(EquipmentInventory.class,EquipmentInventory_.INVENTORY_EDIT_LOGS)
                 .addExclusion(EquipmentInventory.class,EquipmentInventory_.EQUIPMENT_STATES)
