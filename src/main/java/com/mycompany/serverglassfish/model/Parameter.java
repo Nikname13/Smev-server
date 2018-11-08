@@ -46,7 +46,7 @@ public class Parameter implements Serializable {
     @SerializedName("mEntityList")
     private List<ValueParameter> values=new ArrayList();
     
-    @OneToMany(mappedBy="parameter", orphanRemoval = true)
+    @OneToMany(mappedBy="parameter")
     private List<EquipmentParameter> eq_parameter=new ArrayList<>();
 
     public int getId() {

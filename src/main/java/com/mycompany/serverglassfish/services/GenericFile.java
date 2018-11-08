@@ -6,6 +6,7 @@
 package com.mycompany.serverglassfish.services;
 
 import com.google.gson.Gson;
+import com.mycompany.serverglassfish.DAO.GenericType;
 import com.mycompany.serverglassfish.model.FileDump;
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
@@ -20,4 +21,5 @@ public interface GenericFile {
  void setLink(FileDump fileD, String type, int id);//переопределяемый метод. добавляет ссылку на сущность
  String getNameField(String type);//переопределяемы метод. получение наименования поля, по которому связаны таблицы, для поиска
  Gson getGson();//переопределяемый метод. исключение полей из Gson
+ GenericType getCriterion(String criterion);
 }

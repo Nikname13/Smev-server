@@ -7,11 +7,13 @@ package com.mycompany.serverglassfish.services;
 
 import com.google.gson.Gson;
 import com.mycompany.serverglassfish.DAO.GenericHibernateDAO;
+import com.mycompany.serverglassfish.DAO.GenericType;
 import com.mycompany.serverglassfish.DAO.HibernateUtil;
 import com.mycompany.serverglassfish.model.FileDump;
 import gson.GsonUtil;
 import java.io.File;
 import java.io.IOException;
+import static java.lang.Integer.parseInt;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +34,7 @@ import javax.servlet.http.Part;
                  maxFileSize=1024*1024*10,      // 10MB
                  maxRequestSize=1024*1024*50,
                  location="C:\\") 
-public class GenericFileServlet<T> extends HttpServlet implements GenericFile {
+public abstract class GenericFileServlet<T> extends HttpServlet implements GenericFile {
     
     private Class<T> persistentClass;
     private String entityDir;
@@ -63,11 +65,11 @@ public class GenericFileServlet<T> extends HttpServlet implements GenericFile {
         GenericHibernateDAO dao = new GenericHibernateDAO(getPersistentClass());
         
         String type=req.getParameter("type");
-//        List<FileDump> fileDumpList=dao.getList(Integer.valueOf(req.getParameter("id")), id_, getNameField(type));
-//        for(FileDump file:fileDumpList){
-//            System.out.println(file.getId());
-//        }
-//        resp.getWriter().write(getGson().toJson(fileDumpList));
+        List<FileDump> fileDumpList=dao.getList(getCriterion(req.getParameter("id")), id_, getNameField(type));
+        for(FileDump file:fileDumpList){
+            System.out.println(file.getId());
+        }
+        resp.getWriter().write(getGson().toJson(fileDumpList));
     }
     
     private void doGetFile(HttpServletRequest req, HttpServletResponse resp) throws IOException{
@@ -147,5 +149,10 @@ public class GenericFileServlet<T> extends HttpServlet implements GenericFile {
     @Override
     public Gson getGson(){
         return new GsonUtil().getGson();          
+    }
+
+    @Override
+    public GenericType getCriterion(String criterion) {
+         return new GenericType<Integer>(parseInt(criterion));
     }
 }
