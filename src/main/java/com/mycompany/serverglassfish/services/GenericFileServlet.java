@@ -17,6 +17,7 @@ import static java.lang.Integer.parseInt;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.servlet.ServletException;
@@ -52,14 +53,10 @@ public abstract class GenericFileServlet<T> extends HttpServlet implements Gener
     }
     
     @Override
-    public void setLink(FileDump fileD, String type, int id){
-        
-    }
-    
+    public abstract void setLink(FileDump fileD, String type, int id);
+
     @Override
-    public String getNameField(String type){
-        return "";
-    }
+    public abstract String getNameField(String type);
     
     private void doGetList(HttpServletRequest req, HttpServletResponse resp) throws IOException{
         GenericHibernateDAO dao = new GenericHibernateDAO(getPersistentClass());
@@ -69,7 +66,7 @@ public abstract class GenericFileServlet<T> extends HttpServlet implements Gener
         for(FileDump file:fileDumpList){
             System.out.println(file.getId());
         }
-        resp.getWriter().write(getGson().toJson(fileDumpList));
+        respEncoding(resp).getWriter().write(getGson().toJson(fileDumpList));
     }
     
     private void doGetFile(HttpServletRequest req, HttpServletResponse resp) throws IOException{
@@ -119,7 +116,7 @@ public abstract class GenericFileServlet<T> extends HttpServlet implements Gener
             System.out.println("---part---");
             FileDump fileD=new FileDump();
             String fileName=extractFileName(part);
-            String extension = fileName.substring(fileName.length()-4, fileName.length());
+            String extension = fileName.substring(fileName.lastIndexOf("."));
             fileD.setName(fileName);
             fileD.setPath(UUID.randomUUID().toString().concat(extension));
             setLink(fileD, type,Integer.valueOf(id));
@@ -130,7 +127,7 @@ public abstract class GenericFileServlet<T> extends HttpServlet implements Gener
         }
         dao.closeSession();
         System.out.println(getGson().toJson(fileDumpList));
-        resp.getWriter().write(getGson().toJson(fileDumpList));
+        respEncoding(resp).getWriter().write(getGson().toJson(fileDumpList));
     }
     
     private String extractFileName(Part part){
@@ -145,6 +142,58 @@ public abstract class GenericFileServlet<T> extends HttpServlet implements Gener
         }
         return "";
     }   
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String responseError="";
+        GenericHibernateDAO dao = new GenericHibernateDAO(getPersistentClass());
+        Set<Integer> idList=Parser.getId(req);
+        for(int id:idList){
+          FileDump deleteFileModel = (FileDump)dao.get(id);
+                  String filePath ="C:"
+                          +File.separator
+                          +dir
+                          +File.separator+entityDir
+                          +File.separator+req.getParameter("idEntity")
+                          +File.separator+req.getParameter("type")
+                          +File.separator+deleteFileModel.getPath();
+       System.out.println(filePath);
+       responseError = new GenericHibernateDAO(getPersistentClass()).delete(id);
+       File file=new File(filePath);
+        if (!responseError.isEmpty()){
+            respEncoding(resp).getWriter().write(responseError);
+        }else{
+            if(file.exists()){
+           Files.delete(file.toPath());
+       }else{
+            System.out.println("файла не существет либо путь неверен");
+       }
+        }
+       }            
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        GenericHibernateDAO dao = new GenericHibernateDAO(getPersistentClass());
+        String type=req.getParameter("type");
+        String id=req.getParameter("id");
+        if (id != null && type!=null){  
+        FileDump entity=(FileDump)getTypeFromJson(req);
+        setLink(entity, type, Integer.valueOf(id));
+        String error = dao.update(entity);
+        dao.closeSession();
+        if (error.isEmpty()) {
+                respEncoding(resp).getWriter().write(getGson().toJson(entity));
+        } else {
+            respEncoding(resp).getWriter().write(error);
+        }
+        }
+    }
+    
+    
+    private T getTypeFromJson(HttpServletRequest req) throws IOException {
+        return new GsonUtil<T>().getEntityFromJson(req, getPersistentClass());
+    }
     
     @Override
     public Gson getGson(){
@@ -154,5 +203,11 @@ public abstract class GenericFileServlet<T> extends HttpServlet implements Gener
     @Override
     public GenericType getCriterion(String criterion) {
          return new GenericType<Integer>(parseInt(criterion));
+    }
+    
+    protected HttpServletResponse respEncoding(HttpServletResponse resp) {
+        resp.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/xml");
+        return resp;
     }
 }

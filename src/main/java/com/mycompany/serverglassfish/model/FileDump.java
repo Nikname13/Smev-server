@@ -8,6 +8,7 @@ package com.mycompany.serverglassfish.model;
 import com.google.gson.annotations.SerializedName;
 import com.mycompany.serverglassfish.model.Department;
 import com.mycompany.serverglassfish.model.Equipment;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -31,7 +32,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="file_dump")
-public class FileDump {
+public class FileDump implements Serializable  {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
