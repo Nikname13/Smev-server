@@ -6,6 +6,7 @@
 package com.mycompany.serverglassfish.services;
 
 import com.google.gson.Gson;
+import com.mycompany.serverglassfish.DAO.ExceptionConverter;
 import com.mycompany.serverglassfish.DAO.GenericHibernateDAO;
 import com.mycompany.serverglassfish.DAO.HibernateUtil;
 import com.mycompany.serverglassfish.DAO.GenericType;
@@ -38,7 +39,7 @@ public abstract class GenericManyToManyServlet<T> extends GenericCRUDServlet<T> 
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        try{
         String type = req.getParameter("type");
         if (type==null) {
             super.doGet(req,resp);
@@ -52,6 +53,9 @@ public abstract class GenericManyToManyServlet<T> extends GenericCRUDServlet<T> 
                 respEncoding(resp).getWriter().write(getGsonFromList().toJson(dao.getAll()));
             }
             dao.closeSession();
+        }
+                }catch(Exception ex){
+            respEncoding(resp).getWriter().write(ExceptionConverter.getSpecialty(ex));
         }
     }
 

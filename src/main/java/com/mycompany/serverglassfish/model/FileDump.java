@@ -69,9 +69,27 @@ public class FileDump implements Serializable  {
     @OneToMany(mappedBy="avatar")
     private Set<Department> departmentAvatar=new HashSet();
     
+    @ManyToMany
+    @JoinTable(name="equipment_config_file",
+            joinColumns=@JoinColumn(name="file_dump_id"),
+            inverseJoinColumns=@JoinColumn(name="equipment_id"))
+    private  List<Equipment> equipment_config_files=new ArrayList<>();
+     
+    @ManyToMany
+    @JoinTable(name="equipmentInvent_photo_file",
+            joinColumns=@JoinColumn(name="file_dump_id"),
+            inverseJoinColumns=@JoinColumn(name="equipment_id"))
+    private  List<EquipmentInventory> equipmentInvent_photo_files=new ArrayList<>();
+    
     @OneToMany(mappedBy="avatar")
     private Set<EquipmentInventory> equipmentAvatar=new HashSet();
 
+    @ManyToMany
+    @JoinTable(name="supply_documentation_file",
+            joinColumns=@JoinColumn(name="file_dump_id"),
+            inverseJoinColumns=@JoinColumn(name="supply_id"))
+    private  List<Supply> supply_doc_files=new ArrayList<>();
+    
     public int getId() {
         return id;
     }
@@ -104,10 +122,6 @@ public class FileDump implements Serializable  {
     public void setDepartment_doc_files(List<Department> department_doc_files) {
         this.department_doc_files = department_doc_files;
     }
-               //обязательное соответствие имен 
-    public String getNameDepartmentDocList(){
-        return "department_doc_files";
-    }
 
     public List<Department> getDepartment_config_files() {
         return department_config_files;
@@ -115,10 +129,6 @@ public class FileDump implements Serializable  {
 
     public void setDepartment_config_files(List<Department> department_config_files) {
         this.department_config_files = department_config_files;
-    }
-    
-    public String getNameDepartmentConfigList(){
-        return "department_config_files";
     }
 
     public List<Department> getDepartment_photo_files() {
@@ -129,10 +139,6 @@ public class FileDump implements Serializable  {
         this.department_photo_files = department_photo_files;
     }
 
-    public String getNameDepartmentPhotoList(){
-        return "department_photo_files";
-    }
-
     public Set<Department> getDepartmentAvatar() {
         return departmentAvatar;
     }
@@ -141,6 +147,22 @@ public class FileDump implements Serializable  {
         this.departmentAvatar = departmentAvatar;
     }
 
+    public List<Equipment> getEquipment_config_files() {
+        return equipment_config_files;
+    }
+
+    public void setEquipment_config_files(List<Equipment> equipment_config_files) {
+        this.equipment_config_files = equipment_config_files;
+    }
+
+    public List<EquipmentInventory> getEquipmentInvent_photo_file() {
+        return equipmentInvent_photo_files;
+    }
+
+    public void setEquipmentInvent_photo_file(List<EquipmentInventory> equipmentInvent_photo_file) {
+        this.equipmentInvent_photo_files = equipmentInvent_photo_file;
+    }
+    
     public Set<EquipmentInventory> getEquipmentAvatar() {
         return equipmentAvatar;
     }
@@ -148,24 +170,40 @@ public class FileDump implements Serializable  {
     public void setEquipmentAvatar(Set<EquipmentInventory> equipmentAvatar) {
         this.equipmentAvatar = equipmentAvatar;
     }
-    
-    
+
+    public List<Supply> getSupply_documentation_file() {
+        return supply_doc_files;
+    }
+
+    public void setSupply_documentation_file(List<Supply> supply_documentation_file) {
+        this.supply_doc_files = supply_documentation_file;
+    }
     
     public void addDoc(Department department){
         department_doc_files.add(department);
     }
     
+    public void addDoc(Supply supply){
+        supply_doc_files.add(supply);
+    }
+    
     public void addConfig(Department department){
         department_config_files.add(department);
+    }
+        
+    public void addConfig(Equipment equipment){
+        equipment_config_files.add(equipment);
     }
     
     public void addPhoto(Department department){
         department_photo_files.add(department);
     }
-    
-    public void addDoc(Equipment equipment){
         
+    public void addPhoto(EquipmentInventory eq_inventory){
+        equipmentInvent_photo_files.add(eq_inventory);
     }
+
+
     
     
 }

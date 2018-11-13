@@ -7,6 +7,7 @@ package com.mycompany.serverglassfish.services;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.mycompany.serverglassfish.DAO.ExceptionConverter;
 import com.mycompany.serverglassfish.DAO.GenericHibernateDAO;
 import gson.GsonUtil;
 import java.io.IOException;
@@ -68,6 +69,7 @@ public abstract class GenericCRUDServlet<T> extends HttpServlet implements Gener
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse resp)
             throws ServletException, IOException {
+        try{
         System.out.println("doGet");
         GenericHibernateDAO dao = new GenericHibernateDAO(getPersistentClass());
         if (request.getParameter("id") != null) {
@@ -80,11 +82,15 @@ public abstract class GenericCRUDServlet<T> extends HttpServlet implements Gener
             respEncoding(resp).getWriter().write(getGsonFromList().toJson(dao.getAll()));
         }
         dao.closeSession();
+        }catch(Exception ex){
+            respEncoding(resp).getWriter().write(ExceptionConverter.getSpecialty(ex));
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+        try{
         System.out.println("POST");
         System.out.println("in json = " + req);
         String error = "";
@@ -100,15 +106,22 @@ public abstract class GenericCRUDServlet<T> extends HttpServlet implements Gener
         } else {
             respEncoding(resp).getWriter().write(error);
         }
+        }catch(Exception ex){
+            respEncoding(resp).getWriter().write(ExceptionConverter.getSpecialty(ex));
+        }
     }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
+        try{
         System.out.println("DELETE");
         String response = new GenericHibernateDAO(getPersistentClass()).delete(Parser.getId(req));
         if (!response.isEmpty()) {
             respEncoding(resp).getWriter().write(response);
+        }
+                }catch(Exception ex){
+            respEncoding(resp).getWriter().write(ExceptionConverter.getSpecialty(ex));
         }
     }
 
@@ -116,7 +129,8 @@ public abstract class GenericCRUDServlet<T> extends HttpServlet implements Gener
     protected void doPut(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         //super.doPut(req, resp); //To change body of generated methods, choose Tools | Templates.
-        System.out.println("PUT");
+       try{
+           System.out.println("PUT");
         GenericHibernateDAO dao = new GenericHibernateDAO(getPersistentClass());
         String error = "";
         List<T> list = new ArrayList();
@@ -132,6 +146,9 @@ public abstract class GenericCRUDServlet<T> extends HttpServlet implements Gener
                 respEncoding(resp).getWriter().write(getJson(list));
         } else {
             respEncoding(resp).getWriter().write(error);
+        }
+       }catch(Exception ex){
+            respEncoding(resp).getWriter().write(ExceptionConverter.getSpecialty(ex));
         }
     }
 

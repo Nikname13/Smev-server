@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.mycompany.serverglassfish.services;
+package com.mycompany.serverglassfish.services.FileServices;
 
 
+import com.mycompany.serverglassfish.services.FileServices.GenericFileServlet;
 import com.google.gson.Gson;
 import com.mycompany.serverglassfish.model.Department;
 import com.mycompany.serverglassfish.model.Department_;
@@ -20,10 +21,10 @@ import javax.servlet.annotation.WebServlet;
  * @author a.zolotarev
  */
 @WebServlet(name = "DepartmentLoadFileServlet", urlPatterns = {"/load_department_servlet"})
-public class DepartmentLoadFileServlet extends GenericFileServlet<FileDump>{
+public class DepartmentLoadFileServlet extends BaseLoadFileServlet{
 
     public DepartmentLoadFileServlet() {
-        super(FileDump.class, "department", Department_.id);
+        super("department", Department_.id);
     }
 
     @Override
@@ -46,29 +47,13 @@ public class DepartmentLoadFileServlet extends GenericFileServlet<FileDump>{
     public String getNameField(String type) {
         switch (type) {
             case ("doc"):
-                return new FileDump().getNameDepartmentDocList();
+                return FileDump_.DEPARTMENT_DOC_FILES;
             case ("config"):
-                return new FileDump().getNameDepartmentConfigList();
+                return FileDump_.DEPARTMENT_CONFIG_FILES;
             case ("photo"):
-                return new FileDump().getNameDepartmentPhotoList();
+                return FileDump_.DEPARTMENT_PHOTO_FILES;
         }
         return "";
     }
-    
-    
-
-    @Override
-    public Gson getGson() {
-        return new GsonUtil()
-                .addExclusion(FileDump.class, FileDump_.DEPARTMENT_DOC_FILES)
-                .addExclusion(FileDump.class, FileDump_.DEPARTMENT_CONFIG_FILES)
-                .addExclusion(FileDump.class, FileDump_.DEPARTMENT_PHOTO_FILES)
-                .getGson();
-    }
-
-   
-    
-    
-
     
 }
