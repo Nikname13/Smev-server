@@ -5,35 +5,34 @@
  */
 package com.mycompany.serverglassfish.services.FileServices;
 
-import com.google.gson.Gson;
 import com.mycompany.serverglassfish.model.Equipment;
 import com.mycompany.serverglassfish.model.Equipment_;
 import com.mycompany.serverglassfish.model.FileDump;
 import com.mycompany.serverglassfish.model.FileDump_;
-import gson.GsonUtil;
-
+import com.mycompany.serverglassfish.model.Supply;
+import com.mycompany.serverglassfish.model.Supply_;
 import javax.servlet.annotation.WebServlet;
 
 /**
  *
  * @author a.zolotarev
  */
-@WebServlet(name = "EquipmentLoadFileServlet", urlPatterns = {"/load_equipment_servlet"})
-public class EquipmentLoadFileServlet extends BaseLoadFileServlet{
+@WebServlet(name = "SupplyLoadFileServlet", urlPatterns = {"/load_supply_servlet"})
+public class SupplyLoadFileServlet extends BaseLoadFileServlet{
 
-    public EquipmentLoadFileServlet() {
-        super("equipment", Equipment_.id);
+    public SupplyLoadFileServlet() {
+        super("supply", Supply_.id);
     }
 
     @Override
     public void setLink(FileDump fileD, String type, int id) {
-        Equipment equipment=new Equipment();
-        equipment.setId(id);
-        fileD.addConfig(equipment);
+        Supply supply=new Supply();
+        supply.setId(id);
+        fileD.addDoc(supply);
     }
 
     @Override
     public String getNameField(String type) {
-                return FileDump_.EQUIPMENT_CONFIG_FILES;
+                return FileDump_.SUPPLY_DOC_FILES;
     }
 }
