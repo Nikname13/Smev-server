@@ -27,6 +27,7 @@ public abstract class BaseLoadFileServlet extends GenericFileServlet<FileDump>{
                 .addExclusion(FileDump.class, FileDump_.DEPARTMENT_DOC_FILES)
                 .addExclusion(FileDump.class, FileDump_.DEPARTMENT_CONFIG_FILES)
                 .addExclusion(FileDump.class, FileDump_.DEPARTMENT_PHOTO_FILES)
+                .addExclusion(FileDump.class, FileDump_.DEPARTMENT_AVATAR)
                 
                 .addExclusion(FileDump.class, FileDump_.EQUIPMENT_CONFIG_FILES)
                 

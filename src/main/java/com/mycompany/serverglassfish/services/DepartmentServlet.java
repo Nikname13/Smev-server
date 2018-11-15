@@ -38,6 +38,7 @@ public class DepartmentServlet extends GenericCRUDServlet<Department> {
     public DepartmentServlet() {
         super(Department.class,new TypeToken<ArrayList<Department>>(){}.getType());
     }
+    
 
     @Override
     public Gson getGsonFromList() {
@@ -46,6 +47,17 @@ public class DepartmentServlet extends GenericCRUDServlet<Department> {
                 .addExclusion(Department.class, Department_.WORKERS_LIST_DEPARTMNET)
                 .addExclusion(Department.class, Department_.PURCHASE_LIST_DEPARTMENT)
                 .addExclusion(Department.class, Department_.EQUIPMENT_LIST)
+                
+                .addExclusion(FileDump.class, FileDump_.DEPARTMENT_AVATAR)
+                .addExclusion(FileDump.class, FileDump_.DEPARTMENT_DOC_FILES)
+                .addExclusion(FileDump.class, FileDump_.DEPARTMENT_CONFIG_FILES)
+                .addExclusion(FileDump.class, FileDump_.DEPARTMENT_PHOTO_FILES)
+                
+                .addExclusion(FileDump.class, FileDump_.EQUIPMENT_CONFIG_FILES)
+                
+                .addExclusion(FileDump.class, FileDump_.EQUIPMENT_INVENT_PHOTO_FILES)
+                
+                .addExclusion(FileDump.class, FileDump_.SUPPLY_DOC_FILES)
                 .getGson();
     }
 
@@ -59,6 +71,16 @@ public class DepartmentServlet extends GenericCRUDServlet<Department> {
                 .addExclusion(Department.class, Department_.EQUIPMENT_LIST)
                 
                 .addExclusion(FileDump.class, FileDump_.DEPARTMENT_AVATAR)
+                
+                .addExclusion(FileDump.class, FileDump_.DEPARTMENT_DOC_FILES)
+                .addExclusion(FileDump.class, FileDump_.DEPARTMENT_CONFIG_FILES)
+                .addExclusion(FileDump.class, FileDump_.DEPARTMENT_PHOTO_FILES)
+                
+                .addExclusion(FileDump.class, FileDump_.EQUIPMENT_CONFIG_FILES)
+                
+                .addExclusion(FileDump.class, FileDump_.EQUIPMENT_INVENT_PHOTO_FILES)
+                
+                .addExclusion(FileDump.class, FileDump_.SUPPLY_DOC_FILES)
                 .getGson();
     
 }

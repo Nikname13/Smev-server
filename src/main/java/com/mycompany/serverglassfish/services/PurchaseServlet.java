@@ -40,6 +40,7 @@ public class PurchaseServlet extends GenericCRUDServlet<Purchase> {
                 .addExclusion(Department.class, Department_.PURCHASE_LIST_DEPARTMENT)
                 .addExclusion(Department.class, Department_.WORKERS_LIST_DEPARTMNET)
                 .addExclusion(Department.class, Department_.EQUIPMENT_LIST)
+                .addExclusion(Department.class, Department_.AVATAR)
                 .getGson();
     }
     
