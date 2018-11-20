@@ -8,6 +8,7 @@ package com.mycompany.serverglassfish.model;
 import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,6 +17,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
+import org.hibernate.annotations.UpdateTimestamp;
 
 /**
  *
@@ -23,14 +27,8 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="equipment_state_log")
-public class StateLog implements Serializable {
-   
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id")
-    @SerializedName("mId")
-    private int id;
-    
+public class StateLog extends BaseModel implements Serializable {
+ 
     @Column(name="name", nullable=false)
     @SerializedName("mName")
     private String name;
@@ -46,14 +44,6 @@ public class StateLog implements Serializable {
     @ManyToOne
     @JoinColumn(name="equipment_id")
     private EquipmentInventory equipmentInventoryLog;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

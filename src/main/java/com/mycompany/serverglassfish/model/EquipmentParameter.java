@@ -7,6 +7,7 @@ package com.mycompany.serverglassfish.model;
 
 import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,6 +17,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
+import org.hibernate.annotations.UpdateTimestamp;
 
 /**
  *
@@ -23,14 +27,8 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(name="equipment_parameter", uniqueConstraints={@UniqueConstraint(columnNames={"equipment_id","parameter_id"})})
-public class EquipmentParameter implements Serializable {
-    
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id")
-    @SerializedName("mId")
-    private int id;
-    
+public class EquipmentParameter extends BaseModel implements Serializable {
+  
     @ManyToOne
     @JoinColumn(name="equipment_id", nullable=false)
     private Equipment equipment;
@@ -43,14 +41,6 @@ public class EquipmentParameter implements Serializable {
     @Column(name="parameterValue")
     @SerializedName("mName")
     private String parameterValue;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public Equipment getEquipment() {
         return equipment;

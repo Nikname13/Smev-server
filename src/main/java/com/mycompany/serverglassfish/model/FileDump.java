@@ -9,6 +9,7 @@ import com.google.gson.annotations.SerializedName;
 import com.mycompany.serverglassfish.model.Department;
 import com.mycompany.serverglassfish.model.Equipment;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -25,6 +26,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
+import org.hibernate.annotations.UpdateTimestamp;
 
 /**
  *
@@ -32,14 +36,8 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="file_dump")
-public class FileDump implements Serializable  {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "id")
-    @SerializedName("mId")
-    private int id;
-    
+public class FileDump extends BaseModel implements Serializable  {
+  
     @Column(name = "name",nullable=false)
     @SerializedName("mName")
     private String name;
@@ -89,15 +87,7 @@ public class FileDump implements Serializable  {
             joinColumns=@JoinColumn(name="file_dump_id"),
             inverseJoinColumns=@JoinColumn(name="supply_id"))
     private  List<Supply> supply_doc_files=new ArrayList<>();
-    
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
+  
     public String getName() {
         return name;
     }

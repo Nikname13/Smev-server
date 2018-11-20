@@ -7,6 +7,7 @@ package com.mycompany.serverglassfish.model;
 
 import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -22,6 +23,9 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
+import org.hibernate.annotations.UpdateTimestamp;
 
 /**
  *
@@ -29,13 +33,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="type")
-public class TypeModel implements Serializable {
-    
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column (name = "id")
-    @SerializedName("mId")
-    private int id;
+public class TypeModel extends BaseModel implements Serializable {
     
     @Column(name="name", nullable=false)
     @SerializedName("mName")
@@ -51,14 +49,6 @@ public class TypeModel implements Serializable {
     @OneToMany(mappedBy="type",cascade=CascadeType.REFRESH, orphanRemoval = true)
     private List<Equipment> equipments=new ArrayList<>();
     
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
     }

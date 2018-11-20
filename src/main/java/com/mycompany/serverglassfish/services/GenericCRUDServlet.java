@@ -6,9 +6,9 @@
 package com.mycompany.serverglassfish.services;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.mycompany.serverglassfish.DAO.ExceptionConverter;
 import com.mycompany.serverglassfish.DAO.GenericHibernateDAO;
+import com.mycompany.serverglassfish.model.BaseModel;
 import gson.GsonUtil;
 import java.io.IOException;
 import static java.lang.Integer.parseInt;

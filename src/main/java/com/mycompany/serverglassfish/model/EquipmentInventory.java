@@ -7,6 +7,7 @@ package com.mycompany.serverglassfish.model;
 
 import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -24,6 +25,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
+import org.hibernate.annotations.UpdateTimestamp;
 
 
 /**
@@ -32,14 +36,8 @@ import org.hibernate.annotations.CascadeType;
  */
 @Entity
 @Table(name="equipment_inventory")
-public class EquipmentInventory implements Serializable{
-    
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id")
-    @SerializedName("mId")
-    private int id;
-        
+public class EquipmentInventory extends BaseModel implements Serializable{
+ 
     @Column(name="guaranty")
     @SerializedName("mGuaranty")
     private int guaranty;
@@ -85,14 +83,6 @@ public class EquipmentInventory implements Serializable{
     @ManyToOne
     @JoinColumn(name="file_dump_id")
     private FileDump avatar;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public int getGuaranty() {
         return guaranty;

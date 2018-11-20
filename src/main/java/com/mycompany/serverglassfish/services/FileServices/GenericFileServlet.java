@@ -71,6 +71,7 @@ public abstract class GenericFileServlet<T> extends HttpServlet implements Gener
                 System.out.println(file.getId());
             }
             respEncoding(resp).getWriter().write(getGson().toJson(fileDumpList));
+                        dao.closeSession();
         } catch (Exception ex) {
             respEncoding(resp).getWriter().write(ExceptionConverter.getSpecialty(ex));
         }

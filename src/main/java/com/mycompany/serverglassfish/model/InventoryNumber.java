@@ -7,6 +7,7 @@ package com.mycompany.serverglassfish.model;
 
 import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -22,6 +23,9 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
+import org.hibernate.annotations.UpdateTimestamp;
 
 /**
  *
@@ -29,14 +33,8 @@ import org.hibernate.annotations.CascadeType;
  */
 @Entity
 @Table(name="inventory_number", uniqueConstraints={@UniqueConstraint(columnNames={"number","supply_id"})})
-public class InventoryNumber implements Serializable {
-    
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id")
-    @SerializedName("mId")
-    private int id;
-    
+public class InventoryNumber extends BaseModel implements Serializable {
+ 
     @Column(name="number", nullable=false)
     @SerializedName("mName")
     private String number;
@@ -61,14 +59,6 @@ public class InventoryNumber implements Serializable {
     @Cascade({CascadeType.ALL})
     @SerializedName("mEntityList")
     private List<InventoryNumberLog> inventoryNumberLogList;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getNumber() {
         return number;

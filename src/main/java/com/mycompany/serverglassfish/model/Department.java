@@ -3,7 +3,7 @@ package com.mycompany.serverglassfish.model;
 
 import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
-import java.lang.annotation.Annotation;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
@@ -12,13 +12,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
+import org.hibernate.annotations.UpdateTimestamp;
 
 /**
  *
@@ -26,13 +27,7 @@ import org.hibernate.annotations.CascadeType;
  */
 @Entity
 @Table(name="department")
-public class Department implements Serializable {
-    
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id")
-    @SerializedName("mId")
-    private int id;
+public class Department extends BaseModel implements Serializable {
     
     @Column(name="name", nullable=false)
     @SerializedName("mName")
@@ -83,14 +78,6 @@ public class Department implements Serializable {
 
     public void setArea(Area area) {
         this.area = area;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {

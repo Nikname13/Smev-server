@@ -8,6 +8,7 @@ package com.mycompany.serverglassfish.model;
 import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -20,6 +21,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
+import org.hibernate.annotations.UpdateTimestamp;
 
 /**
  *
@@ -27,13 +31,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="supply")
-public class Supply implements Serializable {
-    
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id")
-    @SerializedName("mId")
-    private int id;
+public class Supply extends BaseModel implements Serializable {
     
     @Column(name="number", nullable=false,unique=true)
     @SerializedName("mName")
@@ -59,15 +57,7 @@ public class Supply implements Serializable {
     
     @OneToMany(mappedBy="supply", cascade=CascadeType.ALL)
     @SerializedName("mEntityList")
-    private List<InventoryNumber> inventoryList =new ArrayList();
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+    private List<InventoryNumber> inventoryList =new ArrayList(); 
 
     public String getNumber() {
         return number;

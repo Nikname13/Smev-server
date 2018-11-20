@@ -8,6 +8,7 @@ package com.mycompany.serverglassfish.model;
 import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -24,6 +25,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
+import org.hibernate.annotations.UpdateTimestamp;
 
 /**
  *
@@ -31,14 +35,8 @@ import org.hibernate.annotations.CascadeType;
  */
 @Entity
 @Table(name="movement_log")
-public class MovementLog implements Serializable {
-    
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id")
-    @SerializedName("mId")
-    private int id;
-    
+public class MovementLog extends BaseModel implements Serializable {
+ 
     @Column(name="base", nullable=false)
     @SerializedName("mName")
     private String base;
@@ -58,14 +56,6 @@ public class MovementLog implements Serializable {
     @OneToMany(mappedBy="workerMovement",cascade=javax.persistence.CascadeType.ALL)
     @SerializedName("mWorkerList")
     private List<MovementWorker> workersList=new ArrayList();
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getBase() {
         return base;

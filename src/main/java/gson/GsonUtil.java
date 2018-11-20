@@ -26,12 +26,12 @@ public class GsonUtil<T> {
     private Map<String,Class<?>> map;
     
     public GsonUtil() {
-        System.out.print("GsonUtil constructor");
+       // System.out.print("GsonUtil constructor");
         map=new HashMap<String,Class<?>>();
     } 
     
     public GsonUtil addExclusion(Class c, String name){
-        System.out.println("in class= "+c+" in fieldName= "+name);
+        //System.out.println("in class= "+c+" in fieldName= "+name);
         //System.out.println("in map size= "+map.size());
         map.put(name,c);
         //System.out.println("out map size= "+map.size());
@@ -57,7 +57,7 @@ public class GsonUtil<T> {
             while ((line = reader.readLine()) != null) {
                 sb.append(line).append('\n');
             }
-            System.out.println(sb.toString());
+            //System.out.println(sb.toString());
             reader.close();
             return sb.toString();
     }

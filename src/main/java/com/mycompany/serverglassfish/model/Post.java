@@ -6,6 +6,8 @@
 package com.mycompany.serverglassfish.model;
 
 import com.google.gson.annotations.SerializedName;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -15,6 +17,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
+import org.hibernate.annotations.UpdateTimestamp;
 
 /**
  *
@@ -22,27 +27,14 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="post")
-public class Post {
-     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id")
-    @SerializedName("mId")
-    private int id;
-    
+public class Post extends BaseModel implements Serializable {
+  
     @Column(name="name", nullable=false)
     @SerializedName("mName")
     private String name;
     
     @OneToMany(mappedBy="post")
     private Set<Worker> workerList=new HashSet<Worker>();
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
