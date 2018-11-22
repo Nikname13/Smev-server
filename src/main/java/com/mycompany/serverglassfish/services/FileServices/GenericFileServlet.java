@@ -17,6 +17,8 @@ import java.io.File;
 import java.io.IOException;
 import static java.lang.Integer.parseInt;
 import java.nio.file.Files;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -63,18 +65,37 @@ public abstract class GenericFileServlet<T> extends HttpServlet implements Gener
     public abstract String getNameField(String type);
 
     private void doGetList(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        try {
-            GenericHibernateDAO dao = new GenericHibernateDAO(getPersistentClass());
+        GenericHibernateDAO dao = new GenericHibernateDAO(getPersistentClass());
+        try { 
             String type = req.getParameter("type");
+            String reqUpdate =req.getParameter("lastUpdate");
+            LocalDateTime lastUpdate=LocalDateTime.MIN;
             List<FileDump> fileDumpList = dao.getList(getCriterion(req.getParameter("id")), id_, getNameField(type));
-            for (FileDump file : fileDumpList) {
-                System.out.println(file.getId());
+            if (fileDumpList != null) {
+                lastUpdate=fileDumpList.get(0).getLastUpdate();
+                for (FileDump file : fileDumpList) {
+                    System.out.println(file.getId());
+                    if(file.getLastUpdate().isAfter(lastUpdate)){
+                        lastUpdate=file.getLastUpdate();
+                    }
+                }
             }
+            
+            if(reqUpdate!=null){
+                LocalDateTime newdate=LocalDateTime.parse(reqUpdate);
+                if(LocalDateTime.parse(reqUpdate).compareTo(lastUpdate)==-1){
             respEncoding(resp).getWriter().write(getGson().toJson(fileDumpList));
-                        dao.closeSession();
+                }else{
+                resp.sendError(HttpServletResponse.SC_NOT_MODIFIED);
+            }
+            }else{
+                respEncoding(resp).getWriter().write(getGson().toJson(fileDumpList));
+            }
+                  dao.closeSession();
         } catch (Exception ex) {
             respEncoding(resp).getWriter().write(ExceptionConverter.getSpecialty(ex));
         }
+
     }
 
     private void doGetFile(HttpServletRequest req, HttpServletResponse resp) throws IOException {

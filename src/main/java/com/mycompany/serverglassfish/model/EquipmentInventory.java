@@ -82,6 +82,7 @@ public class EquipmentInventory extends BaseModel implements Serializable{
     
     @ManyToOne
     @JoinColumn(name="file_dump_id")
+    @SerializedName("mAvatar")
     private FileDump avatar;
 
     public int getGuaranty() {
