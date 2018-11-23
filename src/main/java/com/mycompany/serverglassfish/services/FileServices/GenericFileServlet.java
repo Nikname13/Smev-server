@@ -71,7 +71,7 @@ public abstract class GenericFileServlet<T> extends HttpServlet implements Gener
             String reqUpdate =req.getParameter("lastUpdate");
             LocalDateTime lastUpdate=LocalDateTime.MIN;
             List<FileDump> fileDumpList = dao.getList(getCriterion(req.getParameter("id")), id_, getNameField(type));
-            if (fileDumpList != null) {
+            if (fileDumpList != null && fileDumpList.size()!=0) {
                 lastUpdate=fileDumpList.get(0).getLastUpdate();
                 for (FileDump file : fileDumpList) {
                     System.out.println(file.getId());
@@ -82,7 +82,6 @@ public abstract class GenericFileServlet<T> extends HttpServlet implements Gener
             }
             
             if(reqUpdate!=null){
-                LocalDateTime newdate=LocalDateTime.parse(reqUpdate);
                 if(LocalDateTime.parse(reqUpdate).compareTo(lastUpdate)==-1){
             respEncoding(resp).getWriter().write(getGson().toJson(fileDumpList));
                 }else{

@@ -116,6 +116,7 @@ public class EquipmentInventoryServlet extends GenericManyToManyServlet<Equipmen
                 .addExclusion(FileDump.class, FileDump_.EQUIPMENT_CONFIG_FILES)
                 
                 .addExclusion(FileDump.class, FileDump_.EQUIPMENT_INVENT_PHOTO_FILES)
+                .addExclusion(FileDump.class, FileDump_.EQUIPMENT_AVATAR)
                 
                 .addExclusion(FileDump.class, FileDump_.SUPPLY_DOC_FILES)
                 .getGson();
