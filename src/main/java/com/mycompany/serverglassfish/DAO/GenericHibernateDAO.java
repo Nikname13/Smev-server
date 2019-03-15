@@ -5,21 +5,13 @@
  */
 package com.mycompany.serverglassfish.DAO;
 
-import com.mycompany.serverglassfish.model.Department;
-import com.mycompany.serverglassfish.model.FileDump;
-import java.io.PrintWriter;
 import java.io.Serializable;
-import java.io.StringWriter;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.Root;
-import javax.persistence.criteria.SetJoin;
-import javax.persistence.criteria.Subquery;
-import javax.persistence.metamodel.SetAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import org.hibernate.Session;
 

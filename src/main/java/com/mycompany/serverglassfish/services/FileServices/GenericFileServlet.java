@@ -23,8 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -32,6 +30,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 /**
  *
@@ -46,7 +47,8 @@ public abstract class GenericFileServlet<T> extends HttpServlet implements Gener
     private Class<T> persistentClass;
     private String entityDir;
     private SingularAttribute id_;
-    private static String dir = "uploadDir";
+    private static String dir = "smevMV";
+    private static final Logger LOG = LoggerFactory.getLogger(GenericFileServlet.class);
 
     public GenericFileServlet(Class<T> persistentClass, String entity, SingularAttribute id) {
         this.persistentClass = persistentClass;
@@ -81,15 +83,15 @@ public abstract class GenericFileServlet<T> extends HttpServlet implements Gener
                 }
             }
             
-            if(reqUpdate!=null){
-                if(LocalDateTime.parse(reqUpdate).compareTo(lastUpdate)==-1){
-            respEncoding(resp).getWriter().write(getGson().toJson(fileDumpList));
-                }else{
-                resp.sendError(HttpServletResponse.SC_NOT_MODIFIED);
-            }
-            }else{
+//            if(reqUpdate!=null){
+//                if(LocalDateTime.parse(reqUpdate).compareTo(lastUpdate)==-1){
+//            respEncoding(resp).getWriter().write(getGson().toJson(fileDumpList));
+//                }else{
+//                resp.sendError(HttpServletResponse.SC_NOT_MODIFIED);
+//            }
+//            }else{
                 respEncoding(resp).getWriter().write(getGson().toJson(fileDumpList));
-            }
+//            }
                   dao.closeSession();
         } catch (Exception ex) {
             respEncoding(resp).getWriter().write(ExceptionConverter.getSpecialty(ex));
@@ -129,21 +131,21 @@ public abstract class GenericFileServlet<T> extends HttpServlet implements Gener
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("Upload start " + File.separator);
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {   
         try {
             String type = req.getParameter("type");
             String id = req.getParameter("id");
             String savePath = dir + File.separator + entityDir + File.separator + id + File.separator + type;
-            System.out.println(savePath + " paramId= " + id);
-            File fileSaveDir = new File("C:\\" + savePath);
+            LOG.info("File path "+savePath + " paramId= " + id);
+            File fileSaveDir = new File("C:"+File.separator+savePath);
             if (!fileSaveDir.exists()) {
                 fileSaveDir.mkdirs();
             }
             List<FileDump> fileDumpList = new ArrayList<>();
             GenericHibernateDAO dao = new GenericHibernateDAO(FileDump.class);
+             LOG.info("Parts "+req.getParts().size());
             for (Part part : req.getParts()) {
-                System.out.println("---part---");
+                LOG.info("---part---");
                 FileDump fileD = new FileDump();
                 String fileName = extractFileName(part);
                 String extension = fileName.substring(fileName.lastIndexOf("."));
@@ -152,20 +154,21 @@ public abstract class GenericFileServlet<T> extends HttpServlet implements Gener
                 setLink(fileD, type, Integer.valueOf(id));
                 dao.create(fileD);
                 fileDumpList.add(fileD);
-                System.out.println("fileName=" + fileName + " - " + extension);
-                part.write(savePath + File.separator + fileD.getPath());
+                LOG.info("fileName= " + fileName + " - " + extension);
+                part.write("C:"+File.separator+savePath + File.separator + fileD.getPath());
             }
             dao.closeSession();
             System.out.println(getGson().toJson(fileDumpList));
             respEncoding(resp).getWriter().write(getGson().toJson(fileDumpList));
         } catch (Exception ex) {
+            LOG.error("Error load file "+ex);
             respEncoding(resp).getWriter().write(ExceptionConverter.getSpecialty(ex));
         }
     }
 
     private String extractFileName(Part part) {
         String contentDisp = part.getHeader("content-disposition");
-        System.out.print(contentDisp);
+        LOG.info(contentDisp);
         String[] items = contentDisp.split(";");
         for (String s : items) {
             System.out.println(s);
